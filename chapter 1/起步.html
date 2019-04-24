@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-04-24 Wed 21:02 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Zerxoi" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org4e321aa">1. 起步</a>
+<ul>
+<li><a href="#org18532c9">1.1. 什么是版本控制（Version Control）</a></li>
+<li><a href="#orgb4b0322">1.2. 安装 Git</a></li>
+<li><a href="#org45e23ee">1.3. 初次运行 Git 前的配置</a>
+<ul>
+<li><a href="#org06d129a">1.3.1. 配置文件</a></li>
+<li><a href="#org79b95a6">1.3.2. 用户信息</a></li>
+</ul>
+</li>
+<li><a href="#org97e0ec7">1.4. Git 基础</a>
+<ul>
+<li><a href="#org6fe9d0e">1.4.1. Git与其他版本控制器的差异</a></li>
+<li><a href="#org3472ee3">1.4.2. 近乎所有操作都是本地执行</a></li>
+<li><a href="#org2cf3387">1.4.3. Git 保证完整性</a></li>
+<li><a href="#org8f54cc9">1.4.4. Git 一般只添加数据</a></li>
+<li><a href="#orga543cc6">1.4.5. Git中文件的三种状态</a></li>
+</ul>
+</li>
+<li><a href="#org1f9a563">1.5. 获取帮助</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org4e321aa" class="outline-2">
+<h2 id="org4e321aa"><span class="section-number-2">1</span> 起步</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org18532c9" class="outline-3">
+<h3 id="org18532c9"><span class="section-number-3">1.1</span> 什么是版本控制（Version Control）</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+<a href="https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%85%B3%E4%BA%8E%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6">起步-关于版本控制</a>
+</p>
+
+<p>
+<span class="underline">版本控制</span> 是一种记录一个或若干文件内容变化，以便将来查阅特定版本修订情况的 <b>系统</b> 。
+</p>
+</div>
+</div>
+<div id="outline-container-orgb4b0322" class="outline-3">
+<h3 id="orgb4b0322"><span class="section-number-3">1.2</span> 安装 Git</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+<a href="https://git-scm.com/">下载地址</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org45e23ee" class="outline-3">
+<h3 id="org45e23ee"><span class="section-number-3">1.3</span> 初次运行 Git 前的配置</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+<a href="https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%88%9D%E6%AC%A1%E8%BF%90%E8%A1%8C-Git-%E5%89%8D%E7%9A%84%E9%85%8D%E7%BD%AE">起步 - 初次运行 Git 前的配置</a>
+</p>
+
+<p>
+既然已经在系统上安装了 Git，你会想要做几件事来定制你的 Git 环境。 每台计算机上只需要配置一次，程序升级时会保留配置信息。 你可以在任何时候再次通过运行命令来修改它们。
+</p>
+</div>
+
+<div id="outline-container-org06d129a" class="outline-4">
+<h4 id="org06d129a"><span class="section-number-4">1.3.1</span> 配置文件</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<p>
+Git 自带一个 git config 的工具来帮助设置控制 Git 外观和行为的配置变量。
+</p>
+
+<p>
+这些变量存储在三个不同的位置：
+</p>
+<ol class="org-ol">
+<li>文件目录： <code>/etc/gitconfig</code> / <code>C:\Documents and Settings\All Users\Application Data\Git\config</code> 。 包含系统上每一个用户及他们仓库的通用配置。 <code>--system</code> 选项</li>
+<li>文件目录： <code>~/.gitconfig</code> 或 <code>~/.config/git/config</code> / <code>C:\Users\$USER</code> 。 只针对当前用户。 <code>--global</code> 选项</li>
+<li>文件目录： <code>.git/config</code> 。 针对该仓库。</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org79b95a6" class="outline-4">
+<h4 id="org79b95a6"><span class="section-number-4">1.3.2</span> 用户信息</h4>
+<div class="outline-text-4" id="text-1-3-2">
+<p>
+当安装完 Git 应该做的第一件事就是设置你的用户名称与邮件地址。 这样做很重要，因为每一个 Git 的提交都会使用这些信息，并且它会写入到你的每一次提交中，不可更改：
+</p>
+
+<pre class="example">
+$ git config --global user.name "John Doe"
+$ git config --global user.email johndoe@example.com
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org97e0ec7" class="outline-3">
+<h3 id="org97e0ec7"><span class="section-number-3">1.4</span> Git 基础</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+<a href="https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-Git-%E5%9F%BA%E7%A1%80">起步 - Git 基础</a>
+</p>
+</div>
+
+<div id="outline-container-org6fe9d0e" class="outline-4">
+<h4 id="org6fe9d0e"><span class="section-number-4">1.4.1</span> Git与其他版本控制器的差异</h4>
+<div class="outline-text-4" id="text-1-4-1">
+<p>
+Git 和其它版本控制系统（包括 Subversion 和近似工具）的主要差别在于 Git对待数据的方法。 
+</p>
+
+<p>
+概念上来区分，其它大部分系统以 <b>文件变更列表</b> 的方式存储信息。 这类系统（CVS、Subversion、Perforce、Bazaar 等等）将它们保存的信息看作是一组基本文件和每个文件随时间逐步累积的差异。
+</p>
+
+<p>
+<a href="./img/deltas.png">图1. 存储每个文件与初始版本的差异</a>
+</p>
+
+<p>
+Git 不按照以上方式对待或保存数据。 反之，Git 更像是把数据看作是对小型文件系统的一组快照。 每次你提交更新，或在 Git 中保存项目状态时，它主要对当时的全部文件制作一个快照并保存这个快照的 <i>索引</i> 。 为了高效，如果文件没有修改，Git 不再重新存储该文件，而是只保留一个链接指向之前存储的文件。Git 对待数据更像是一个 <b>快照流</b> 。
+</p>
+
+<p>
+<a href="./img/snapshots.png">图2. 存储项目随时间改变的快照</a>
+</p>
+
+<p>
+这是 Git 与几乎所有其它版本控制系统的重要区别。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org3472ee3" class="outline-4">
+<h4 id="org3472ee3"><span class="section-number-4">1.4.2</span> 近乎所有操作都是本地执行</h4>
+<div class="outline-text-4" id="text-1-4-2">
+<p>
+在 Git 中的绝大多数操作都只需要访问本地文件和资源，一般不需要来自网络上其它计算机的信息。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2cf3387" class="outline-4">
+<h4 id="org2cf3387"><span class="section-number-4">1.4.3</span> Git 保证完整性</h4>
+<div class="outline-text-4" id="text-1-4-3">
+<p>
+Git 中所有数据在存储前都计算校验和，然后以校验和来引用。 这意味着不可能在 Git 不知情时更改任何文件内容或目录内容。 这个功能建构在 Git 底层，是构成 Git 哲学不可或缺的部分。 若你在传送过程中丢失信息或损坏文件，Git 就能发现。
+</p>
+
+<p>
+Git 用以计算校验和的机制叫做 SHA-1 散列（hash，哈希）。 这是一个由 40个十六进制字符（0-9 和 a-f）组成的字符串，基于 Git 中 <b>文件的内容或目录结构</b> 计算出来。
+</p>
+
+<p>
+SHA-1 哈希看起来是这样：
+</p>
+<pre class="example">
+24b9da6552252987aa493b52f8696cd6d3b00373
+</pre>
+<p>
+<span class="underline">实际上， Git 数据库中保存的信息都是以文件内容的 <b>哈希值</b> 来 <i>索引</i> ，而不是文件名。</span>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8f54cc9" class="outline-4">
+<h4 id="org8f54cc9"><span class="section-number-4">1.4.4</span> Git 一般只添加数据</h4>
+<div class="outline-text-4" id="text-1-4-4">
+<p>
+你执行的 Git 操作，几乎只往 Git 数据库中增加数据。 很难让 Git 执行任何不可逆操作，或者让它以任何方式清除数据。 同别的 VCS 一样，未提交更新时有可能丢失或弄乱修改的内容；但是一旦你提交快照到 Git 中，就难以再丢失数据，特别是如果你定期的推送数据库到其它仓库的话。
+</p>
+
+<p>
+这使得我们使用 Git 成为一个安心愉悦的过程，因为我们深知可以尽情做各种尝试，而没有把事情弄糟的危险。
+</p>
+</div>
+</div>
+<div id="outline-container-orga543cc6" class="outline-4">
+<h4 id="orga543cc6"><span class="section-number-4">1.4.5</span> Git中文件的三种状态</h4>
+<div class="outline-text-4" id="text-1-4-5">
+<p>
+Git 有 <b>三种状态</b> ，你的文件可能处于其中之一： <span class="underline">已提交（committed）</span> 、<sub>已修改</sub>（modified）_ 和 <span class="underline">已暂存（staged）</span> 。
+</p>
+
+<ul class="org-ul">
+<li>已提交表示数据已经安全的保存在本地数据库中。</li>
+<li>已修改表示修改了文件，但还没保存到数据库中。</li>
+<li>已暂存表示对一个已修改文件的当前版本做了标记，使之包含在下次提交的快照中。</li>
+</ul>
+
+<p>
+由此引入 Git 项目的三个工作区域的概念： <span class="underline">Git 仓库(repository）</span> 、 <span class="underline">工作目录（working tree）</span> 以及 <span class="underline">暂存区域（staging area/ index)</span> 。
+</p>
+
+<p>
+<a href="./img/areas.png">图3. 工作目录、暂存区域以及 Git 仓库.</a>
+</p>
+
+<ul class="org-ul">
+<li><span class="underline">Git 仓库</span> 目录是 Git 用来保存项目的元数据和对象数据库的地方。 这是  Git 中最重要的部分，从其它计算机克隆仓库时，拷贝的就是这里的数据。</li>
+<li><span class="underline">工作目录</span> 是对项目的某个版本独立提取出来的内容。 这些从 Git 仓库的压缩数据库中提取出来的文件，放在磁盘上供你使用或修改。</li>
+<li><span class="underline">暂存区域</span> 是一个文件，保存了下次将提交的文件列表信息，一般在 Git 仓库目录中。 有时候也被称作‘索引（index）’，不过一般说法还是叫暂存区域。</li>
+</ul>
+
+<p>
+<b>基本的 Git 工作流程</b> 如下：
+</p>
+<ol class="org-ol">
+<li>在工作目录中修改文件。</li>
+<li>暂存文件，将文件的快照放入暂存区域。</li>
+<li>提交更新，找到暂存区域的文件，将快照永久性存储到 Git 仓库目录。</li>
+</ol>
+
+<p>
+<b>文件状态的判断</b>
+</p>
+<ul class="org-ul">
+<li>如果 Git 目录中保存着特定版本的文件，就属于已提交状态。</li>
+<li>如果作了修改并已放入暂存区域，就属于已暂存状态。</li>
+<li>如果自上次取出后，作了修改但还没有放到暂存区域，就是已修改状态。</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org1f9a563" class="outline-3">
+<h3 id="org1f9a563"><span class="section-number-3">1.5</span> 获取帮助</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+<a href="https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E8%8E%B7%E5%8F%96%E5%B8%AE%E5%8A%A9">起步 - 获取帮助</a>
+</p>
+
+<p>
+若你使用 Git 时需要获取帮助，有三种方法可以找到 Git 命令的使用手册：
+</p>
+<pre class="example">
+$ git help &lt;verb&gt;
+$ git &lt;verb&gt; --help
+$ man git-&lt;verb&gt;
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Zerxoi</p>
+<p class="date">Created: 2019-04-24 Wed 21:02</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

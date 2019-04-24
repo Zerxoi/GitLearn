@@ -1,0 +1,690 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-04-25 Thu 00:12 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Zerxoi" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org581c366">1. Git 内部原理（上）</a>
+<ul>
+<li><a href="#org2ac6e62">1.1. 前言</a></li>
+<li><a href="#orgc60e7ae">1.2. 底层命令和高层命令</a></li>
+<li><a href="#org15abb97">1.3. .git 目录文件说明</a>
+<ul>
+<li><a href="#org8b7be81">1.3.1. <span class="todo TODO">TODO</span> 添加 <code>branchs</code> 目录的功能。</a></li>
+<li><a href="#org70841f3">1.3.2. <span class="todo TODO">TODO</span> 了解 <code>hooks</code> 中钩子的用处。</a></li>
+</ul>
+</li>
+<li><a href="#org6e7a6fd">1.4. Git 对象</a>
+<ul>
+<li><a href="#orgd40bfc9">1.4.1. 数据对象（blob object）</a></li>
+<li><a href="#org53493e1">1.4.2. 树对象（tree object）</a></li>
+<li><a href="#orgb8b9836">1.4.3. 提交对象（conmmit object）</a></li>
+<li><a href="#org4d7e5bf">1.4.4. 标签对象（tag object）</a></li>
+<li><a href="#org808f267">1.4.5. 总结</a></li>
+</ul>
+</li>
+<li><a href="#org4688653">1.5. Git 引用</a>
+<ul>
+<li><a href="#org7ea2035">1.5.1. HEAD 引用（HEAD reference）</a></li>
+<li><a href="#org4d99c8b">1.5.2. 标签引用（tag reference）</a></li>
+<li><a href="#orgba47dfb">1.5.3. 远程引用（remote reference）</a></li>
+<li><a href="#org017875b">1.5.4. <span class="todo TODO">TODO</span> 完善远程引用部分</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org581c366" class="outline-2">
+<h2 id="org581c366"><span class="section-number-2">1</span> Git 内部原理（上）</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org2ac6e62" class="outline-3">
+<h3 id="org2ac6e62"><span class="section-number-3">1.1</span> 前言</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+虽然内部原理这部分内容对于初学者而言可能有点难以理解且过于复杂，但是内部原理的学习对于理解Git的用途和强大至关重要，所以把这一步部分放在前面。
+</p>
+
+<p>
+首先要弄明白一点，从根本上来讲 Git 是一个 <b>内容寻址文件系统（content-addressable file system）</b> ，并在此之上提供了一个版本控制系统的用户界面。 马上你就会学到这意味着什么。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc60e7ae" class="outline-3">
+<h3 id="orgc60e7ae"><span class="section-number-3">1.2</span> 底层命令和高层命令</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+<a href="https://git-scm.com/book/zh/v2/Git-%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86-%E5%BA%95%E5%B1%82%E5%91%BD%E4%BB%A4%E5%92%8C%E9%AB%98%E5%B1%82%E5%91%BD%E4%BB%A4">Git 内部原理 - 底层命令和高层命令</a>
+</p>
+
+<p>
+本教程旨在讨论如何通过 <code>checkout</code> 、 <code>branch</code> 、 <code>remote</code> 等大约 30 个诸如此类动词形式的命令来介绍 Git 的基本使用。 然而，由于 Git 最初是一套面向版本控制系统的工具集，而不是一个完整的、用户友好的版本控制系统，所以它还包含了一部分用于完成底层工作的命令。 这些命令被设计成能以 UNIX 命令行的风格连接在一起，抑或藉由脚本调用，来完成工作。 这部分命令一般被称作 <b>“底层（plumbing）”命令</b> ，而那些更友好的命令则被称作 <b>“高层（porcelain）”命令</b> 。
+</p>
+
+<p>
+底层命令得以让你窥探 Git 内部的工作机制，也有助于说明 Git 是如何完成工作的，以及它为何如此运作。 多数底层命令并不面向最终用户：它们更适合作为新命令和自定义脚本的组成部分。所以在本章节并不做过多介绍，而重点讲解Git 的工作机制。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org15abb97" class="outline-3">
+<h3 id="org15abb97"><span class="section-number-3">1.3</span> .git 目录文件说明</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+<a href="https://git-scm.com/book/zh/v2/Git-%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86-%E5%BA%95%E5%B1%82%E5%91%BD%E4%BB%A4%E5%92%8C%E9%AB%98%E5%B1%82%E5%91%BD%E4%BB%A4">Git 内部原理 - 底层命令和高层命令</a>
+</p>
+
+<p>
+当在一个新目录或已有目录执行 git init 时，Git 会创建一个 .git 目录。这个目录包含了几乎所有 Git 存储和操作的对象。 如若想备份或复制一个版本库，只需把这个目录拷贝至另一处即可。 本章探讨的所有内容，均位于这个目录内。 该目录的结构如下所示：
+</p>
+
+<pre class="example">
+$ tree .git   
+./.git
+├── branches
+├── config
+├── description
+├── HEAD
+├── hooks
+│   ├── applypatch-msg.sample
+│   ├── commit-msg.sample
+│   ├── fsmonitor-watchman.sample
+│   ├── post-update.sample
+│   ├── pre-applypatch.sample
+│   ├── pre-commit.sample
+│   ├── prepare-commit-msg.sample
+│   ├── pre-push.sample
+│   ├── pre-rebase.sample
+│   ├── pre-receive.sample
+│   └── update.sample
+├── info
+│   └── exclude
+├── objects
+│   ├── info
+│   └── pack
+└── refs
+    ├── heads
+    └── tags
+</pre>
+
+<p>
+简单介绍一下各个文件及目录的作用
+</p>
+<ul class="org-ul">
+<li><code>description</code> 文件仅供 GitWeb 程序使用，我们无需关心;</li>
+<li><code>config</code> 文件包含项目特有的配置选项;</li>
+<li><code>info</code> 目录包含一个全局性排除（global exclude）文件，用以放置那些不
+希望被记录在 .gitignore 文件中的忽略模式（ignored patterns）;</li>
+<li><code>hooks</code> 目录包含客户端或服务端的钩子脚本（hook scripts）;</li>
+<li><code>objects</code> 目录存储所有数据内容；</li>
+<li><code>refs</code> 目录存储指向数据（分支）的提交对象的指针；</li>
+<li><code>HEAD</code> 文件指示目前被检出的分支；</li>
+<li><code>index</code> 文件保存暂存区信息(未创建）。</li>
+</ul>
+
+<p>
+本章，我们将会把重点主要放在后4个文件及目录身上。
+</p>
+</div>
+
+<div id="outline-container-org8b7be81" class="outline-4">
+<h4 id="org8b7be81"><span class="section-number-4">1.3.1</span> <span class="todo TODO">TODO</span> 添加 <code>branchs</code> 目录的功能。</h4>
+</div>
+<div id="outline-container-org70841f3" class="outline-4">
+<h4 id="org70841f3"><span class="section-number-4">1.3.2</span> <span class="todo TODO">TODO</span> 了解 <code>hooks</code> 中钩子的用处。</h4>
+</div>
+</div>
+
+<div id="outline-container-org6e7a6fd" class="outline-3">
+<h3 id="org6e7a6fd"><span class="section-number-3">1.4</span> Git 对象</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+<a href="https://git-scm.com/book/zh/v2/Git-%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86-Git-%E5%AF%B9%E8%B1%A1">Git 内部原理 - Git 对象</a>
+</p>
+
+<p>
+Git 是一个 <b>内容寻址文件系统</b> 。  这意味着，Git 的核心部分是一个简单的 <b>键值对数据库（key-value data store）</b> 。 你可以向该数据库插入任意类型的内容，将对象存入 <code>.git/objects/</code> 目录中，它会返回一个键值，通过该键值可以在任意时刻再次检索（retrieve）该内容。
+</p>
+</div>
+<div id="outline-container-orgd40bfc9" class="outline-4">
+<h4 id="orgd40bfc9"><span class="section-number-4">1.4.1</span> 数据对象（blob object）</h4>
+<div class="outline-text-4" id="text-1-4-1">
+</div>
+<ol class="org-ol">
+<li><a id="org49ae8ec"></a>存储数据<br />
+<div class="outline-text-5" id="text-1-4-1-1">
+<p>
+可以通过底层命令 <code>hash-object</code> 来演示上述效果——该命令可将任意数据保存于 .git 目录，并返回相应的键值。
+</p>
+
+<pre class="example">
+$ echo 'Zerxoi' | git hash-object -w --stdin
+f064cb230929237667dedd12c360389743003e6d
+</pre>
+
+<p>
+<code>-w</code> 选项指示 <code>hash-object</code> 命令存储数据对象；若不指定此选项，则该命令 仅返回对应的键值。 <code>--stdin</code> 选项则指示该命令从标准输入读取内容；若不 指定此选项，则须在命令尾部给出待存储文件的路径。
+</p>
+
+<p>
+该命令输出一个长度为 40 个字符的校验和。 这是一个 SHA-1 哈希值——一个将待存储的数据外加一个头部信息（header）一起做 SHA-1 校验运算而得的校验和。
+</p>
+
+<p>
+现在查看 Git 是如何存储数据的。
+</p>
+<pre class="example">
+$ find .git/objects -type f
+.git/objects/f0/64cb230929237667dedd12c360389743003e6d
+</pre>
+
+<p>
+可以在 objects 目录下看到一个文件。 这就是开始时 Git 存储内容的方式——一个文件对应一条内容，以该内容加上特定头部信息一起的 SHA-1 校验和为文件命名。 校验和的前两个字符用于命名子目录，余下的 38 个字符则用作文件名。
+</p>
+</div>
+</li>
+
+<li><a id="org6dc8f93"></a>检索数据<br />
+<div class="outline-text-5" id="text-1-4-1-2">
+<p>
+可以通过 <code>cat-file</code> 命令从 Git 那里取回数据。 为 <code>cat-file</code> 指定 <code>-p</code> 选项可指示该命令自动判断内容的类型，并为我们显示格式友好的内容：
+</p>
+
+<pre class="example">
+$ git cat-file -p f064cb230929237667dedd12c360389743003e6d 
+Zerxoi
+</pre>
+</div>
+</li>
+
+<li><a id="orge8f8553"></a>问题的引入<br />
+<div class="outline-text-5" id="text-1-4-1-3">
+<p>
+至此，你已经掌握了如何向 Git 中存入内容，以及如何将它们取出。 我们同样可以将这些操作应用于文件中的内容。 例如，可以对一个文件进行简单的版本控制。
+</p>
+
+<p>
+然而，记住文件的每一个版本所对应的 SHA-1 值并不现实；另一个问题是，在这个（简单的版本控制）系统中，文件名并没有被保存——我们仅保存了文件的内容。 上述类型的对象我们称之为 <span class="underline">数据对象（blob object）</span> 。 利用=cat-file -t= 命令，可以让 Git 告诉我们其内部存储的任何对象类型，只要给定该对象的 SHA-1 值：
+</p>
+
+<pre class="example">
+$ git cat-file -t f064cb230929237667dedd12c360389743003e6d 
+blob
+</pre>
+</div>
+</li>
+<li><a id="org9b02310"></a><span class="todo TODO">TODO</span> 外加的头部信息是什么？<br /></li>
+</ol>
+</div>
+<div id="outline-container-org53493e1" class="outline-4">
+<h4 id="org53493e1"><span class="section-number-4">1.4.2</span> 树对象（tree object）</h4>
+<div class="outline-text-4" id="text-1-4-2">
+<p>
+接下来要探讨的对象类型是 <span class="underline">树对象（tree object）</span> ，它能解决文件名保存的问题，也允许我们将多个文件组织到一起。 一个树对象包含了一条或多条 <b>树对象记录（tree entry）</b> ，每条记录含有一个指向数据对象或者子树对象的SHA-1 指针，以及相应的模式、类型、文件名信息。 例如，某项目当前对应的最新树对象可能是这样的：
+</p>
+
+<pre class="example">
+$ git cat-file -p master^{tree}
+100644 blob a906cb2a4a904a152e80877d4088654daad0c859      README
+100644 blob 8f94139338f9404f26296befa88755fc2598c289      Rakefile
+040000 tree 99f1a6d12cb4b6f19c8655fca46c3ecf317074e0      lib
+</pre>
+
+<p>
+<code>master^{tree}</code> 语法表示 <code>master</code> 分支上最新的提交所指向的树对象。 输出的每一行都代表这一个书对象记录（tree entry），将文件目录名指向与其对应的键值（SHA-1）。请注意， <code>lib</code> 子目录（所对应的那条树对象记录）并不指向数据对象，其指向的是另一个树对象：
+</p>
+
+<pre class="example">
+$ git cat-file -p 99f1a6d12cb4b6f19c8655fca46c3ecf317074e0
+100644 blob 47c6340d6459e05787f644c2447d2595f5d3a54b      simplegit.rb
+</pre>
+
+<p>
+从概念上讲，Git 内部存储的数据有点像这样：
+</p>
+
+<p>
+<a href="./img/data-model-1.png">图1. 简化版的 Git 数据模型</a>
+</p>
+
+<p>
+由此易得出树对象记录中 <span class="underline">文件名指向数据对象,（子）目录名指向树对象</span> 。
+</p>
+
+<p>
+<span class="underline">Git 根据某一时刻暂存区（即 index 区域，下同）所表示的状态创建并记录一个对应的树对象</span> ，如此重复便可依次记录（某个时间段内）一系列的树对象。因此，为创建一个树对象，首先需要通过暂存一些文件来创建一个暂存区。
+</p>
+
+<p>
+根据以上知识，试试复述一下要如何生成下图中的树对象。
+</p>
+
+<p>
+<a href="./img/data-model-2.png">图2. 树对象结构</a>
+</p>
+
+<p>
+同数据对象一样，同样能对树对象进行存取。
+</p>
+</div>
+</div>
+<div id="outline-container-orgb8b9836" class="outline-4">
+<h4 id="orgb8b9836"><span class="section-number-4">1.4.3</span> 提交对象（conmmit object）</h4>
+<div class="outline-text-4" id="text-1-4-3">
+<p>
+虽然树对象生成了缓存区的快照，分别代表了我们要跟踪的不同项目的快照。然而问题依旧：如果想对应的快照就必须知道对应快照（树对象）的SHA-1哈希值，并且也完全不知道是谁保存了快照，在什么时间保存的，以及为什么要保存这些快照（描述）。而这正是 <span class="underline">提交对象（commit object）</span> 能为你保存的信息。
+</p>
+
+<p>
+可以通过调用 <code>commit-tree</code> 命令创建一个提交对象，为此需要指定一个树对象的 SHA-1 值，以及该提交的父提交对象（如果有的话）,目的是让提交对象成链状。 
+</p>
+
+<pre class="example">
+$ echo 'first commit' | git commit-tree d8329f
+fdf4fc3344e67ab068f836878b6c4951e3b15f3d
+</pre>
+
+<p>
+现在可以通过 <code>cat-file</code> 命令查看这个新提交对象：
+</p>
+
+<pre class="example">
+$ git cat-file -p fdf4fc3
+tree d8329fc1cc938780ffdd9f94e0d364e0ea74f579
+author Scott Chacon &lt;schacon@gmail.com&gt; 1243040974 -0700
+committer Scott Chacon &lt;schacon@gmail.com&gt; 1243040974 -0700
+
+first commit
+</pre>
+
+<p>
+接着，我们将创建另两个提交对象，它们分别引用各自的上一个提交（作为其父提交对象）：
+</p>
+
+<pre class="example">
+$ echo 'second commit' | git commit-tree 0155eb -p fdf4fc3
+cac0cab538b970a37ea1e769cbbde608743bc96d
+$ echo 'third commit'  | git commit-tree 3c4e9c -p cac0cab
+1a410efbd13591db07496601ebc7a059dd55cfe9
+</pre>
+
+<p>
+<a href="./img/data-model-3.png">图3. 提交对象结构</a>
+</p>
+
+<p>
+同上两个对象一样，同样能对提交对象进行存取。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4d7e5bf" class="outline-4">
+<h4 id="org4d7e5bf"><span class="section-number-4">1.4.4</span> 标签对象（tag object）</h4>
+<div class="outline-text-4" id="text-1-4-4">
+<p>
+见下一节中的标签引用。
+</p>
+</div>
+</div>
+<div id="outline-container-org808f267" class="outline-4">
+<h4 id="org808f267"><span class="section-number-4">1.4.5</span> 总结</h4>
+<div class="outline-text-4" id="text-1-4-5">
+<p>
+Git 对文件内容取校验和生成 <span class="underline">数据对象（blob object）</span> 。
+</p>
+
+<p>
+<span class="underline">缓存区（index）</span> 中文件状态生成快照—— <span class="underline">树对象（tree object）</span> ，树对象中的每一条记录（ <span class="underline">树对象记录</span> ）记录这文件名与 <span class="underline">数据对象</span> 和目录名与 <span class="underline">树对象</span> 的对应关系。
+</p>
+
+<p>
+<span class="underline">提交对象</span> 记录所对应的快照以及提交信息（提交者，提交时间，提交描述），生成一个链式的提交记录。
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org4688653" class="outline-3">
+<h3 id="org4688653"><span class="section-number-3">1.5</span> Git 引用</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+<a href="https://git-scm.com/book/zh/v2/Git-%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86-Git-%E5%BC%95%E7%94%A8">Git 内部原理 - Git 引用</a>
+</p>
+
+<p>
+如果最新提交为 <code>1a410e</code> , 可以通过 <code>git log 1a410e</code> 这样的命令来通过链式提交结构浏览完整的提交历史，但为了获取最新提交的提交历史，就必须要记住最后的提交的 SHA-1 哈希值。
+</p>
+
+<p>
+<span class="underline">引用（references， 或缩写为 refs）</span> 应运而生，它是一个用来保存 SHA-1 值的文件，通过给文件起一个简单的名字，然后用这个名字来代替原始的 SHA-1 值。它保存在 <code>.git/refs</code> 目录中。
+</p>
+
+<p>
+这也就是 Git <b>分支</b> 的本质：一个指向一系列提交之首的指针或引用。
+</p>
+
+<p>
+<span class="underline">分支就是个引用文件文件， 位于 <code>.git/refs/</code> 目录中， 文件的内容是一系列提交之首的 SHA-1 哈希值， 并且引用所指随提交而变化， 时刻保持其指向提交之首。</span>
+</p>
+</div>
+
+<div id="outline-container-org7ea2035" class="outline-4">
+<h4 id="org7ea2035"><span class="section-number-4">1.5.1</span> HEAD 引用（HEAD reference）</h4>
+<div class="outline-text-4" id="text-1-5-1">
+<p>
+现在的问题是，当你执行 <code>git branch (branchname)</code> 时，Git 如何知道最新提交的 SHA-1 值呢？ 答案是 HEAD 文件。
+</p>
+
+<p>
+HEAD 文件是一个 <b>符号引用（symbolic references）</b>, 位于 <code>.git/HEAD</code>, 指向目前所在的分支。
+</p>
+
+<p>
+所谓符号引用，意味着他并不像普通的引用那样包含一个 SHA-1 值——它是一个指向其他引用的指针。如果查看 HEAD 文件， 一般而言我们看到的内容类似这样：
+</p>
+<pre class="example">
+$ cat .git/HEAD
+ref: refs/heads/master
+</pre>
+
+<p>
+当我们执行 <code>git commit</code> 时，该命令会创建一个提交对象，并用 HEAD 文件中那个引用所指向的 SHA-1 值设置其父提交字段。
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org528885d"></a><span class="todo TODO">TODO</span> detached HEAD<br /></li>
+</ol>
+</div>
+<div id="outline-container-org4d99c8b" class="outline-4">
+<h4 id="org4d99c8b"><span class="section-number-4">1.5.2</span> 标签引用（tag reference）</h4>
+<div class="outline-text-4" id="text-1-5-2">
+</div>
+<ol class="org-ol">
+<li><a id="orgc5776cb"></a>轻量标签<br />
+<div class="outline-text-5" id="text-1-5-2-1">
+<p>
+轻量标签只有一个 *标签引用*，标签引用位于 <code>.git/refs/tags/</code> 中，内容为（或者说， 直接指向）某提交的 SHA-1 值。
+</p>
+</div>
+</li>
+<li><a id="org5cf3404"></a>附注标签<br />
+<div class="outline-text-5" id="text-1-5-2-2">
+<p>
+附注标签会同时产生一个标签引用和一个标签对象。
+<b>标签对象(tag object)</b> 是个位于 <code>.git/objects/</code> 目录中，/通常情况下/，指向某一提交，并包括标签创建者信息、一个日期、一段注释信息。
+而 <b>标签引用</b> 位于 <code>.git/refs/tags/</code> 目录中，指向该标签对象。
+</p>
+</div>
+</li>
+<li><a id="org733f227"></a>总结<br />
+<div class="outline-text-5" id="text-1-5-2-3">
+<p>
+标签像是一个永不移动的分支引用， 永远指向同一个提交对象， 只不过给这个提交对象加了一个友好的名字罢了。
+另外要注意的是，标签对象并非必须指向某个提交对象；你可以对任意类型的 Git 对象打标签。
+</p>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-orgba47dfb" class="outline-4">
+<h4 id="orgba47dfb"><span class="section-number-4">1.5.3</span> 远程引用（remote reference）</h4>
+<div class="outline-text-4" id="text-1-5-3">
+<p>
+<a href="https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF">Git 分支 - 远程分支</a>
+</p>
+
+<p>
+如果你添加了一个远程版本库并与其进行通信， Git 会记录下最近一次与远程分支通信时每一个远程分支的状态， 并保存在 <code>refs/remotes</code> 目录下。
+</p>
+
+<p>
+远程引用和分支（位于 <code>refs/heads</code> 目录下的引用）之间最主要的区别在于，远程引用是只读的。 虽然可以 <code>git checkout</code> 到某个远程引用，但是 Git 并不会将 HEAD 引用指向该远程引用。因此，你永远不能通过 <code>commit</code> 命令来更新远程引用。 Git 将这些远程引用作为记录远程服务器上各分支最后已知位置状态的书签来管理。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org017875b" class="outline-4">
+<h4 id="org017875b"><span class="section-number-4">1.5.4</span> <span class="todo TODO">TODO</span> 完善远程引用部分</h4>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Zerxoi</p>
+<p class="date">Created: 2019-04-25 Thu 00:12</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

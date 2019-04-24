@@ -1,0 +1,221 @@
+* Git 内部原理（上）
+** 前言
+虽然内部原理这部分内容对于初学者而言可能有点难以理解且过于复杂，但是内部原理的学习对于理解Git的用途和强大至关重要，所以把这一步部分放在前面。
+
+首先要弄明白一点，从根本上来讲 Git 是一个 *内容寻址文件系统（content-addressable file system）* ，并在此之上提供了一个版本控制系统的用户界面。 马上你就会学到这意味着什么。
+
+** 底层命令和高层命令
+[[https://git-scm.com/book/zh/v2/Git-%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86-%E5%BA%95%E5%B1%82%E5%91%BD%E4%BB%A4%E5%92%8C%E9%AB%98%E5%B1%82%E5%91%BD%E4%BB%A4][Git 内部原理 - 底层命令和高层命令]]
+
+本教程旨在讨论如何通过 =checkout= 、 =branch= 、 =remote= 等大约 30 个诸如此类动词形式的命令来介绍 Git 的基本使用。 然而，由于 Git 最初是一套面向版本控制系统的工具集，而不是一个完整的、用户友好的版本控制系统，所以它还包含了一部分用于完成底层工作的命令。 这些命令被设计成能以 UNIX 命令行的风格连接在一起，抑或藉由脚本调用，来完成工作。 这部分命令一般被称作 *“底层（plumbing）”命令* ，而那些更友好的命令则被称作 *“高层（porcelain）”命令* 。
+
+底层命令得以让你窥探 Git 内部的工作机制，也有助于说明 Git 是如何完成工作的，以及它为何如此运作。 多数底层命令并不面向最终用户：它们更适合作为新命令和自定义脚本的组成部分。所以在本章节并不做过多介绍，而重点讲解Git 的工作机制。
+
+** .git 目录文件说明
+[[https://git-scm.com/book/zh/v2/Git-%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86-%E5%BA%95%E5%B1%82%E5%91%BD%E4%BB%A4%E5%92%8C%E9%AB%98%E5%B1%82%E5%91%BD%E4%BB%A4][Git 内部原理 - 底层命令和高层命令]]
+
+当在一个新目录或已有目录执行 git init 时，Git 会创建一个 .git 目录。这个目录包含了几乎所有 Git 存储和操作的对象。 如若想备份或复制一个版本库，只需把这个目录拷贝至另一处即可。 本章探讨的所有内容，均位于这个目录内。 该目录的结构如下所示：
+
+#+BEGIN_EXAMPLE
+$ tree .git   
+./.git
+├── branches
+├── config
+├── description
+├── HEAD
+├── hooks
+│   ├── applypatch-msg.sample
+│   ├── commit-msg.sample
+│   ├── fsmonitor-watchman.sample
+│   ├── post-update.sample
+│   ├── pre-applypatch.sample
+│   ├── pre-commit.sample
+│   ├── prepare-commit-msg.sample
+│   ├── pre-push.sample
+│   ├── pre-rebase.sample
+│   ├── pre-receive.sample
+│   └── update.sample
+├── info
+│   └── exclude
+├── objects
+│   ├── info
+│   └── pack
+└── refs
+    ├── heads
+    └── tags
+#+END_EXAMPLE
+
+简单介绍一下各个文件及目录的作用
++ =description= 文件仅供 GitWeb 程序使用，我们无需关心;
++ =config= 文件包含项目特有的配置选项;
++ =info= 目录包含一个全局性排除（global exclude）文件，用以放置那些不
+  希望被记录在 .gitignore 文件中的忽略模式（ignored patterns）;
++ =hooks= 目录包含客户端或服务端的钩子脚本（hook scripts）;
++ =objects= 目录存储所有数据内容；
++ =refs= 目录存储指向数据（分支）的提交对象的指针；
++ =HEAD= 文件指示目前被检出的分支；
++ =index= 文件保存暂存区信息(未创建）。
+
+本章，我们将会把重点主要放在后4个文件及目录身上。
+
+*** TODO 添加 =branchs= 目录的功能。
+*** TODO 了解 =hooks= 中钩子的用处。
+
+** Git 对象
+[[https://git-scm.com/book/zh/v2/Git-%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86-Git-%E5%AF%B9%E8%B1%A1][Git 内部原理 - Git 对象]]
+
+Git 是一个 *内容寻址文件系统* 。  这意味着，Git 的核心部分是一个简单的 *键值对数据库（key-value data store）* 。 你可以向该数据库插入任意类型的内容，将对象存入 =.git/objects/= 目录中，它会返回一个键值，通过该键值可以在任意时刻再次检索（retrieve）该内容。
+*** 数据对象（blob object）
+**** 存储数据
+可以通过底层命令 =hash-object= 来演示上述效果——该命令可将任意数据保存于 .git 目录，并返回相应的键值。
+
+#+BEGIN_EXAMPLE
+$ echo 'Zerxoi' | git hash-object -w --stdin
+f064cb230929237667dedd12c360389743003e6d
+#+END_EXAMPLE
+
+=-w= 选项指示 =hash-object= 命令存储数据对象；若不指定此选项，则该命令 仅返回对应的键值。 =--stdin= 选项则指示该命令从标准输入读取内容；若不 指定此选项，则须在命令尾部给出待存储文件的路径。
+
+该命令输出一个长度为 40 个字符的校验和。 这是一个 SHA-1 哈希值——一个将待存储的数据外加一个头部信息（header）一起做 SHA-1 校验运算而得的校验和。
+
+现在查看 Git 是如何存储数据的。
+#+BEGIN_EXAMPLE
+$ find .git/objects -type f
+.git/objects/f0/64cb230929237667dedd12c360389743003e6d
+#+END_EXAMPLE
+
+可以在 objects 目录下看到一个文件。 这就是开始时 Git 存储内容的方式——一个文件对应一条内容，以该内容加上特定头部信息一起的 SHA-1 校验和为文件命名。 校验和的前两个字符用于命名子目录，余下的 38 个字符则用作文件名。
+
+**** 检索数据
+可以通过 =cat-file= 命令从 Git 那里取回数据。 为 =cat-file= 指定 =-p= 选项可指示该命令自动判断内容的类型，并为我们显示格式友好的内容：
+
+#+BEGIN_EXAMPLE
+$ git cat-file -p f064cb230929237667dedd12c360389743003e6d 
+Zerxoi
+#+END_EXAMPLE
+
+**** 问题的引入
+至此，你已经掌握了如何向 Git 中存入内容，以及如何将它们取出。 我们同样可以将这些操作应用于文件中的内容。 例如，可以对一个文件进行简单的版本控制。
+
+然而，记住文件的每一个版本所对应的 SHA-1 值并不现实；另一个问题是，在这个（简单的版本控制）系统中，文件名并没有被保存——我们仅保存了文件的内容。 上述类型的对象我们称之为 _数据对象（blob object）_ 。 利用=cat-file -t= 命令，可以让 Git 告诉我们其内部存储的任何对象类型，只要给定该对象的 SHA-1 值：
+
+#+BEGIN_EXAMPLE
+$ git cat-file -t f064cb230929237667dedd12c360389743003e6d 
+blob
+#+END_EXAMPLE
+**** TODO 外加的头部信息是什么？
+*** 树对象（tree object）
+接下来要探讨的对象类型是 _树对象（tree object）_ ，它能解决文件名保存的问题，也允许我们将多个文件组织到一起。 一个树对象包含了一条或多条 *树对象记录（tree entry）* ，每条记录含有一个指向数据对象或者子树对象的SHA-1 指针，以及相应的模式、类型、文件名信息。 例如，某项目当前对应的最新树对象可能是这样的：
+
+#+BEGIN_EXAMPLE
+$ git cat-file -p master^{tree}
+100644 blob a906cb2a4a904a152e80877d4088654daad0c859      README
+100644 blob 8f94139338f9404f26296befa88755fc2598c289      Rakefile
+040000 tree 99f1a6d12cb4b6f19c8655fca46c3ecf317074e0      lib
+#+END_EXAMPLE
+
+=master^{tree}= 语法表示 =master= 分支上最新的提交所指向的树对象。 输出的每一行都代表这一个书对象记录（tree entry），将文件目录名指向与其对应的键值（SHA-1）。请注意， =lib= 子目录（所对应的那条树对象记录）并不指向数据对象，其指向的是另一个树对象：
+
+#+BEGIN_EXAMPLE
+$ git cat-file -p 99f1a6d12cb4b6f19c8655fca46c3ecf317074e0
+100644 blob 47c6340d6459e05787f644c2447d2595f5d3a54b      simplegit.rb
+#+END_EXAMPLE
+
+从概念上讲，Git 内部存储的数据有点像这样：
+
+[[./img/data-model-1.png][图1. 简化版的 Git 数据模型]]
+
+由此易得出树对象记录中 _文件名指向数据对象,（子）目录名指向树对象_ 。
+
+_Git 根据某一时刻暂存区（即 index 区域，下同）所表示的状态创建并记录一个对应的树对象_ ，如此重复便可依次记录（某个时间段内）一系列的树对象。因此，为创建一个树对象，首先需要通过暂存一些文件来创建一个暂存区。
+
+根据以上知识，试试复述一下要如何生成下图中的树对象。
+
+[[./img/data-model-2.png][图2. 树对象结构]]
+
+同数据对象一样，同样能对树对象进行存取。
+*** 提交对象（conmmit object）
+虽然树对象生成了缓存区的快照，分别代表了我们要跟踪的不同项目的快照。然而问题依旧：如果想对应的快照就必须知道对应快照（树对象）的SHA-1哈希值，并且也完全不知道是谁保存了快照，在什么时间保存的，以及为什么要保存这些快照（描述）。而这正是 _提交对象（commit object）_ 能为你保存的信息。
+
+可以通过调用 =commit-tree= 命令创建一个提交对象，为此需要指定一个树对象的 SHA-1 值，以及该提交的父提交对象（如果有的话）,目的是让提交对象成链状。 
+
+#+BEGIN_EXAMPLE
+$ echo 'first commit' | git commit-tree d8329f
+fdf4fc3344e67ab068f836878b6c4951e3b15f3d
+#+END_EXAMPLE
+
+现在可以通过 =cat-file= 命令查看这个新提交对象：
+
+#+BEGIN_EXAMPLE
+$ git cat-file -p fdf4fc3
+tree d8329fc1cc938780ffdd9f94e0d364e0ea74f579
+author Scott Chacon <schacon@gmail.com> 1243040974 -0700
+committer Scott Chacon <schacon@gmail.com> 1243040974 -0700
+
+first commit
+#+END_EXAMPLE
+
+接着，我们将创建另两个提交对象，它们分别引用各自的上一个提交（作为其父提交对象）：
+
+#+BEGIN_EXAMPLE
+$ echo 'second commit' | git commit-tree 0155eb -p fdf4fc3
+cac0cab538b970a37ea1e769cbbde608743bc96d
+$ echo 'third commit'  | git commit-tree 3c4e9c -p cac0cab
+1a410efbd13591db07496601ebc7a059dd55cfe9
+#+END_EXAMPLE
+
+[[./img/data-model-3.png][图3. 提交对象结构]]
+
+同上两个对象一样，同样能对提交对象进行存取。
+
+*** 标签对象（tag object）
+见下一节中的标签引用。
+*** 总结
+Git 对文件内容取校验和生成 _数据对象（blob object）_ 。
+
+_缓存区（index）_ 中文件状态生成快照—— _树对象（tree object）_ ，树对象中的每一条记录（ _树对象记录_ ）记录这文件名与 _数据对象_ 和目录名与 _树对象_ 的对应关系。
+
+_提交对象_ 记录所对应的快照以及提交信息（提交者，提交时间，提交描述），生成一个链式的提交记录。
+** Git 引用
+[[https://git-scm.com/book/zh/v2/Git-%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86-Git-%E5%BC%95%E7%94%A8][Git 内部原理 - Git 引用]]
+
+如果最新提交为 =1a410e= , 可以通过 =git log 1a410e= 这样的命令来通过链式提交结构浏览完整的提交历史，但为了获取最新提交的提交历史，就必须要记住最后的提交的 SHA-1 哈希值。
+
+_引用（references， 或缩写为 refs）_ 应运而生，它是一个用来保存 SHA-1 值的文件，通过给文件起一个简单的名字，然后用这个名字来代替原始的 SHA-1 值。它保存在 =.git/refs= 目录中。
+
+这也就是 Git *分支* 的本质：一个指向一系列提交之首的指针或引用。
+
+_分支就是个引用文件文件， 位于 =.git/refs/= 目录中， 文件的内容是一系列提交之首的 SHA-1 哈希值， 并且引用所指随提交而变化， 时刻保持其指向提交之首。_
+
+*** HEAD 引用（HEAD reference）
+现在的问题是，当你执行 =git branch (branchname)= 时，Git 如何知道最新提交的 SHA-1 值呢？ 答案是 HEAD 文件。
+
+HEAD 文件是一个 *符号引用（symbolic references）*, 位于 =.git/HEAD=, 指向目前所在的分支。
+
+所谓符号引用，意味着他并不像普通的引用那样包含一个 SHA-1 值——它是一个指向其他引用的指针。如果查看 HEAD 文件， 一般而言我们看到的内容类似这样：
+#+BEGIN_EXAMPLE
+$ cat .git/HEAD
+ref: refs/heads/master
+#+END_EXAMPLE
+
+当我们执行 =git commit= 时，该命令会创建一个提交对象，并用 HEAD 文件中那个引用所指向的 SHA-1 值设置其父提交字段。
+**** TODO detached HEAD
+*** 标签引用（tag reference）
+**** 轻量标签
+轻量标签只有一个 *标签引用*，标签引用位于 =.git/refs/tags/= 中，内容为（或者说， 直接指向）某提交的 SHA-1 值。
+**** 附注标签
+附注标签会同时产生一个标签引用和一个标签对象。
+*标签对象(tag object)* 是个位于 =.git/objects/= 目录中，/通常情况下/，指向某一提交，并包括标签创建者信息、一个日期、一段注释信息。
+而 *标签引用* 位于 =.git/refs/tags/= 目录中，指向该标签对象。
+**** 总结
+标签像是一个永不移动的分支引用， 永远指向同一个提交对象， 只不过给这个提交对象加了一个友好的名字罢了。
+另外要注意的是，标签对象并非必须指向某个提交对象；你可以对任意类型的 Git 对象打标签。
+
+*** 远程引用（remote reference）
+[[https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF][Git 分支 - 远程分支]]
+
+如果你添加了一个远程版本库并与其进行通信， Git 会记录下最近一次与远程分支通信时每一个远程分支的状态， 并保存在 =refs/remotes= 目录下。
+
+远程引用和分支（位于 =refs/heads= 目录下的引用）之间最主要的区别在于，远程引用是只读的。 虽然可以 =git checkout= 到某个远程引用，但是 Git 并不会将 HEAD 引用指向该远程引用。因此，你永远不能通过 =commit= 命令来更新远程引用。 Git 将这些远程引用作为记录远程服务器上各分支最后已知位置状态的书签来管理。
+
+*** TODO 完善远程引用部分
