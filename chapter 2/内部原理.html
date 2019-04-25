@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-04-25 Thu 00:12 -->
+<!-- 2019-04-25 Thu 15:04 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>&lrm;</title>
+<title>Chapter 2. Git内部原理</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="Zerxoi" />
 <style type="text/css">
@@ -229,35 +229,34 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
+<h1 class="title">Chapter 2. Git内部原理</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org581c366">1. Git 内部原理（上）</a>
+<li><a href="#orgeb05275">1. Git 内部原理</a>
 <ul>
-<li><a href="#org2ac6e62">1.1. 前言</a></li>
-<li><a href="#orgc60e7ae">1.2. 底层命令和高层命令</a></li>
-<li><a href="#org15abb97">1.3. .git 目录文件说明</a>
+<li><a href="#orgb02200c">1.1. 前言</a></li>
+<li><a href="#org40ddd20">1.2. 底层命令和高层命令</a></li>
+<li><a href="#org0b4ecb4">1.3. .git 目录文件说明</a>
 <ul>
-<li><a href="#org8b7be81">1.3.1. <span class="todo TODO">TODO</span> 添加 <code>branchs</code> 目录的功能。</a></li>
-<li><a href="#org70841f3">1.3.2. <span class="todo TODO">TODO</span> 了解 <code>hooks</code> 中钩子的用处。</a></li>
+<li><a href="#org24b2691">1.3.1. <span class="todo TODO">TODO</span> 添加 <code>branches</code> 目录的功能。</a></li>
 </ul>
 </li>
-<li><a href="#org6e7a6fd">1.4. Git 对象</a>
+<li><a href="#org112fd67">1.4. Git 对象</a>
 <ul>
-<li><a href="#orgd40bfc9">1.4.1. 数据对象（blob object）</a></li>
-<li><a href="#org53493e1">1.4.2. 树对象（tree object）</a></li>
-<li><a href="#orgb8b9836">1.4.3. 提交对象（conmmit object）</a></li>
-<li><a href="#org4d7e5bf">1.4.4. 标签对象（tag object）</a></li>
-<li><a href="#org808f267">1.4.5. 总结</a></li>
+<li><a href="#org7be8216">1.4.1. 数据对象（blob object）</a></li>
+<li><a href="#org8fd2505">1.4.2. 树对象（tree object）</a></li>
+<li><a href="#org1fd2ba1">1.4.3. 提交对象（conmmit object）</a></li>
+<li><a href="#org9fd0060">1.4.4. 标签对象（tag object）</a></li>
+<li><a href="#orge4c29de">1.4.5. 总结</a></li>
 </ul>
 </li>
-<li><a href="#org4688653">1.5. Git 引用</a>
+<li><a href="#org387f6ef">1.5. Git 引用</a>
 <ul>
-<li><a href="#org7ea2035">1.5.1. HEAD 引用（HEAD reference）</a></li>
-<li><a href="#org4d99c8b">1.5.2. 标签引用（tag reference）</a></li>
-<li><a href="#orgba47dfb">1.5.3. 远程引用（remote reference）</a></li>
-<li><a href="#org017875b">1.5.4. <span class="todo TODO">TODO</span> 完善远程引用部分</a></li>
+<li><a href="#org734da53">1.5.1. HEAD 引用（HEAD reference）</a></li>
+<li><a href="#org1de8fa1">1.5.2. 标签引用（tag reference）</a></li>
+<li><a href="#org7adb461">1.5.3. <del>远程引用（remote reference）</del> 远程跟踪分支（remote-tracking branches）</a></li>
 </ul>
 </li>
 </ul>
@@ -265,12 +264,12 @@ for the JavaScript code in this tag.
 </ul>
 </div>
 </div>
-<div id="outline-container-org581c366" class="outline-2">
-<h2 id="org581c366"><span class="section-number-2">1</span> Git 内部原理（上）</h2>
+<div id="outline-container-orgeb05275" class="outline-2">
+<h2 id="orgeb05275"><span class="section-number-2">1</span> Git 内部原理</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org2ac6e62" class="outline-3">
-<h3 id="org2ac6e62"><span class="section-number-3">1.1</span> 前言</h3>
+<div id="outline-container-orgb02200c" class="outline-3">
+<h3 id="orgb02200c"><span class="section-number-3">1.1</span> 前言</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 虽然内部原理这部分内容对于初学者而言可能有点难以理解且过于复杂，但是内部原理的学习对于理解Git的用途和强大至关重要，所以把这一步部分放在前面。
@@ -282,8 +281,8 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-orgc60e7ae" class="outline-3">
-<h3 id="orgc60e7ae"><span class="section-number-3">1.2</span> 底层命令和高层命令</h3>
+<div id="outline-container-org40ddd20" class="outline-3">
+<h3 id="org40ddd20"><span class="section-number-3">1.2</span> 底层命令和高层命令</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 <a href="https://git-scm.com/book/zh/v2/Git-%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86-%E5%BA%95%E5%B1%82%E5%91%BD%E4%BB%A4%E5%92%8C%E9%AB%98%E5%B1%82%E5%91%BD%E4%BB%A4">Git 内部原理 - 底层命令和高层命令</a>
@@ -299,8 +298,8 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-org15abb97" class="outline-3">
-<h3 id="org15abb97"><span class="section-number-3">1.3</span> .git 目录文件说明</h3>
+<div id="outline-container-org0b4ecb4" class="outline-3">
+<h3 id="org0b4ecb4"><span class="section-number-3">1.3</span> .git 目录文件说明</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 <a href="https://git-scm.com/book/zh/v2/Git-%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86-%E5%BA%95%E5%B1%82%E5%91%BD%E4%BB%A4%E5%92%8C%E9%AB%98%E5%B1%82%E5%91%BD%E4%BB%A4">Git 内部原理 - 底层命令和高层命令</a>
@@ -347,7 +346,7 @@ $ tree .git
 <li><code>config</code> 文件包含项目特有的配置选项;</li>
 <li><code>info</code> 目录包含一个全局性排除（global exclude）文件，用以放置那些不
 希望被记录在 .gitignore 文件中的忽略模式（ignored patterns）;</li>
-<li><code>hooks</code> 目录包含客户端或服务端的钩子脚本（hook scripts）;</li>
+<li><code>hooks</code> 目录包含客户端或服务端的钩子脚本（hook scripts）, Git 能在特定的重要动作发生时触发自定义脚本。;</li>
 <li><code>objects</code> 目录存储所有数据内容；</li>
 <li><code>refs</code> 目录存储指向数据（分支）的提交对象的指针；</li>
 <li><code>HEAD</code> 文件指示目前被检出的分支；</li>
@@ -359,16 +358,12 @@ $ tree .git
 </p>
 </div>
 
-<div id="outline-container-org8b7be81" class="outline-4">
-<h4 id="org8b7be81"><span class="section-number-4">1.3.1</span> <span class="todo TODO">TODO</span> 添加 <code>branchs</code> 目录的功能。</h4>
-</div>
-<div id="outline-container-org70841f3" class="outline-4">
-<h4 id="org70841f3"><span class="section-number-4">1.3.2</span> <span class="todo TODO">TODO</span> 了解 <code>hooks</code> 中钩子的用处。</h4>
+<div id="outline-container-org24b2691" class="outline-4">
+<h4 id="org24b2691"><span class="section-number-4">1.3.1</span> <span class="todo TODO">TODO</span> 添加 <code>branches</code> 目录的功能。</h4>
 </div>
 </div>
-
-<div id="outline-container-org6e7a6fd" class="outline-3">
-<h3 id="org6e7a6fd"><span class="section-number-3">1.4</span> Git 对象</h3>
+<div id="outline-container-org112fd67" class="outline-3">
+<h3 id="org112fd67"><span class="section-number-3">1.4</span> Git 对象</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 <a href="https://git-scm.com/book/zh/v2/Git-%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86-Git-%E5%AF%B9%E8%B1%A1">Git 内部原理 - Git 对象</a>
@@ -378,12 +373,12 @@ $ tree .git
 Git 是一个 <b>内容寻址文件系统</b> 。  这意味着，Git 的核心部分是一个简单的 <b>键值对数据库（key-value data store）</b> 。 你可以向该数据库插入任意类型的内容，将对象存入 <code>.git/objects/</code> 目录中，它会返回一个键值，通过该键值可以在任意时刻再次检索（retrieve）该内容。
 </p>
 </div>
-<div id="outline-container-orgd40bfc9" class="outline-4">
-<h4 id="orgd40bfc9"><span class="section-number-4">1.4.1</span> 数据对象（blob object）</h4>
+<div id="outline-container-org7be8216" class="outline-4">
+<h4 id="org7be8216"><span class="section-number-4">1.4.1</span> 数据对象（blob object）</h4>
 <div class="outline-text-4" id="text-1-4-1">
 </div>
 <ol class="org-ol">
-<li><a id="org49ae8ec"></a>存储数据<br />
+<li><a id="orgee19c98"></a>存储数据<br />
 <div class="outline-text-5" id="text-1-4-1-1">
 <p>
 可以通过底层命令 <code>hash-object</code> 来演示上述效果——该命令可将任意数据保存于 .git 目录，并返回相应的键值。
@@ -403,6 +398,23 @@ f064cb230929237667dedd12c360389743003e6d
 </p>
 
 <p>
+校验和计算过程简化
+</p>
+<pre class="example">
+&gt;&gt; content = "what is up, doc?"
+&gt;&gt; header = "blob #{content.length}\0"
+=&gt; "blob 16\u000"
+&gt;&gt; store = header + content
+=&gt; "blob 16\u000what is up, doc?"
+&gt;&gt; sha1 = Digest::SHA1.hexdigest(store)
+=&gt; "bd9dbf5aae1a3862dd1526723246b20206e5fc37"
+</pre>
+
+<p>
+详细过程见 [Git 对象 - 对象存储]
+</p>
+
+<p>
 现在查看 Git 是如何存储数据的。
 </p>
 <pre class="example">
@@ -416,7 +428,7 @@ $ find .git/objects -type f
 </div>
 </li>
 
-<li><a id="org6dc8f93"></a>检索数据<br />
+<li><a id="org8105230"></a>检索数据<br />
 <div class="outline-text-5" id="text-1-4-1-2">
 <p>
 可以通过 <code>cat-file</code> 命令从 Git 那里取回数据。 为 <code>cat-file</code> 指定 <code>-p</code> 选项可指示该命令自动判断内容的类型，并为我们显示格式友好的内容：
@@ -429,7 +441,7 @@ Zerxoi
 </div>
 </li>
 
-<li><a id="orge8f8553"></a>问题的引入<br />
+<li><a id="org3627dcd"></a>问题的引入<br />
 <div class="outline-text-5" id="text-1-4-1-3">
 <p>
 至此，你已经掌握了如何向 Git 中存入内容，以及如何将它们取出。 我们同样可以将这些操作应用于文件中的内容。 例如，可以对一个文件进行简单的版本控制。
@@ -445,11 +457,10 @@ blob
 </pre>
 </div>
 </li>
-<li><a id="org9b02310"></a><span class="todo TODO">TODO</span> 外加的头部信息是什么？<br /></li>
 </ol>
 </div>
-<div id="outline-container-org53493e1" class="outline-4">
-<h4 id="org53493e1"><span class="section-number-4">1.4.2</span> 树对象（tree object）</h4>
+<div id="outline-container-org8fd2505" class="outline-4">
+<h4 id="org8fd2505"><span class="section-number-4">1.4.2</span> 树对象（tree object）</h4>
 <div class="outline-text-4" id="text-1-4-2">
 <p>
 接下来要探讨的对象类型是 <span class="underline">树对象（tree object）</span> ，它能解决文件名保存的问题，也允许我们将多个文件组织到一起。 一个树对象包含了一条或多条 <b>树对象记录（tree entry）</b> ，每条记录含有一个指向数据对象或者子树对象的SHA-1 指针，以及相应的模式、类型、文件名信息。 例如，某项目当前对应的最新树对象可能是这样的：
@@ -500,8 +511,8 @@ $ git cat-file -p 99f1a6d12cb4b6f19c8655fca46c3ecf317074e0
 </p>
 </div>
 </div>
-<div id="outline-container-orgb8b9836" class="outline-4">
-<h4 id="orgb8b9836"><span class="section-number-4">1.4.3</span> 提交对象（conmmit object）</h4>
+<div id="outline-container-org1fd2ba1" class="outline-4">
+<h4 id="org1fd2ba1"><span class="section-number-4">1.4.3</span> 提交对象（conmmit object）</h4>
 <div class="outline-text-4" id="text-1-4-3">
 <p>
 虽然树对象生成了缓存区的快照，分别代表了我们要跟踪的不同项目的快照。然而问题依旧：如果想对应的快照就必须知道对应快照（树对象）的SHA-1哈希值，并且也完全不知道是谁保存了快照，在什么时间保存的，以及为什么要保存这些快照（描述）。而这正是 <span class="underline">提交对象（commit object）</span> 能为你保存的信息。
@@ -550,16 +561,16 @@ $ echo 'third commit'  | git commit-tree 3c4e9c -p cac0cab
 </div>
 </div>
 
-<div id="outline-container-org4d7e5bf" class="outline-4">
-<h4 id="org4d7e5bf"><span class="section-number-4">1.4.4</span> 标签对象（tag object）</h4>
+<div id="outline-container-org9fd0060" class="outline-4">
+<h4 id="org9fd0060"><span class="section-number-4">1.4.4</span> 标签对象（tag object）</h4>
 <div class="outline-text-4" id="text-1-4-4">
 <p>
 见下一节中的标签引用。
 </p>
 </div>
 </div>
-<div id="outline-container-org808f267" class="outline-4">
-<h4 id="org808f267"><span class="section-number-4">1.4.5</span> 总结</h4>
+<div id="outline-container-orge4c29de" class="outline-4">
+<h4 id="orge4c29de"><span class="section-number-4">1.4.5</span> 总结</h4>
 <div class="outline-text-4" id="text-1-4-5">
 <p>
 Git 对文件内容取校验和生成 <span class="underline">数据对象（blob object）</span> 。
@@ -575,8 +586,8 @@ Git 对文件内容取校验和生成 <span class="underline">数据对象（blo
 </div>
 </div>
 </div>
-<div id="outline-container-org4688653" class="outline-3">
-<h3 id="org4688653"><span class="section-number-3">1.5</span> Git 引用</h3>
+<div id="outline-container-org387f6ef" class="outline-3">
+<h3 id="org387f6ef"><span class="section-number-3">1.5</span> Git 引用</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 <a href="https://git-scm.com/book/zh/v2/Git-%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86-Git-%E5%BC%95%E7%94%A8">Git 内部原理 - Git 引用</a>
@@ -599,15 +610,15 @@ Git 对文件内容取校验和生成 <span class="underline">数据对象（blo
 </p>
 </div>
 
-<div id="outline-container-org7ea2035" class="outline-4">
-<h4 id="org7ea2035"><span class="section-number-4">1.5.1</span> HEAD 引用（HEAD reference）</h4>
+<div id="outline-container-org734da53" class="outline-4">
+<h4 id="org734da53"><span class="section-number-4">1.5.1</span> HEAD 引用（HEAD reference）</h4>
 <div class="outline-text-4" id="text-1-5-1">
 <p>
 现在的问题是，当你执行 <code>git branch (branchname)</code> 时，Git 如何知道最新提交的 SHA-1 值呢？ 答案是 HEAD 文件。
 </p>
 
 <p>
-HEAD 文件是一个 <b>符号引用（symbolic references）</b>, 位于 <code>.git/HEAD</code>, 指向目前所在的分支。
+HEAD 文件 <span class="underline">通常</span> 是一个 <b>符号引用（symbolic references）</b>, 位于 <code>.git/HEAD</code>, 指向目前所在的分支。
 </p>
 
 <p>
@@ -623,22 +634,105 @@ ref: refs/heads/master
 </p>
 </div>
 <ol class="org-ol">
-<li><a id="org528885d"></a><span class="todo TODO">TODO</span> detached HEAD<br /></li>
+<li><a id="org7c55fda"></a>detached HEAD<br />
+<div class="outline-text-5" id="text-1-5-1-1">
+<p>
+<a href="https://git-scm.com/docs/git-checkout">git-checkout DETACHED HEAD</a>
+</p>
+
+<p>
+如果足够细心的话，会看见 <code>HEAD 文件 _通常_ 是一个符号引用（symbolic references）</code> ，中的通常加了下划线用以强调，也就是说HEAD也可以不指向某一分支。
+</p>
+
+<p>
+这就是本小结要引出的 <code>detached HEAD</code> 。
+</p>
+
+<p>
+通常情况下 HEAD 引用一个分支，分支指向一个特定的提交，此时我们称 HEAD 间接引用提交。如下图，HEAD 引用 <code>master</code> 分支， <code>master</code> 引用 =commit 'd'=。
+</p>
+<pre class="example">
+               HEAD (refers to branch 'master')
+                |
+                v
+a---b---c---d  branch 'master' (refers to commit 'd')
+    ^
+    |
+  tag 'v2.0' (refers to commit 'b')
+</pre>
+
+<p>
+HEAD 直接引用提交，就是我们所说的 <code>detached HEAD</code> 。如下图， HEAD 直接引用 <code>commit 'b'</code> 。
+</p>
+<pre class="example">
+   HEAD (refers to commit 'b')
+    |
+    v
+a---b---c---d  branch 'master' (refers to commit 'd')
+    ^
+    |
+  tag 'v2.0' (refers to commit 'b')
+</pre>
+
+<p>
+我们可以在 <code>detached HEAD</code> 上做任何 Git 操作， 如果连续提交两个 <code>commit</code> 后，会处于如下状态。
+</p>
+<pre class="example">
+	 HEAD (refers to commit 'f')
+	  |
+	  v
+      e---f
+     /
+a---b---c---d  branch 'master' (refers to commit 'd')
+    ^
+    |
+  tag 'v2.0' (refers to commit 'b')
+</pre>
+
+<p>
+同时，我们也要知道 Git 是有 <b>垃圾回收机制（garbage collection process）</b> 的，如果我们将 HEAD 指向 <code>master</code> 分支， <code>commit 'e'</code> 和 <code>commit 'f'</code> 就没有任何引用，因此会被回收。
+</p>
+</div>
+</li>
+<li><a id="org26b0858"></a>其他 HEAD 引用<br />
+<div class="outline-text-5" id="text-1-5-1-2">
+<p>
+<a href="https://git-scm.com/docs/gitrevisions">gitrevisions</a>
+</p>
+
+<p>
+<code>FETCH_HEAD</code> records the branch which you fetched from a remote repository with your last git fetch invocation. 
+</p>
+
+<p>
+<code>ORIG_HEAD</code> is created by commands that move your HEAD in a drastic way, to record the position of the HEAD before their operation, so that you can easily change the tip of the branch back to the state before you ran them. 
+<b>Note: 危险操作恢复。</b>
+</p>
+
+<p>
+<code>MERGE_HEAD</code> records the commit(s) which you are merging into your branch when you run git merge. 
+</p>
+
+<p>
+<code>CHERRY_PICK_HEAD</code> records the commit which you are cherry-picking when you run git cherry-pick.
+</p>
+</div>
+</li>
 </ol>
 </div>
-<div id="outline-container-org4d99c8b" class="outline-4">
-<h4 id="org4d99c8b"><span class="section-number-4">1.5.2</span> 标签引用（tag reference）</h4>
+<div id="outline-container-org1de8fa1" class="outline-4">
+<h4 id="org1de8fa1"><span class="section-number-4">1.5.2</span> 标签引用（tag reference）</h4>
 <div class="outline-text-4" id="text-1-5-2">
 </div>
 <ol class="org-ol">
-<li><a id="orgc5776cb"></a>轻量标签<br />
+<li><a id="org3b05a3d"></a>轻量标签<br />
 <div class="outline-text-5" id="text-1-5-2-1">
 <p>
 轻量标签只有一个 *标签引用*，标签引用位于 <code>.git/refs/tags/</code> 中，内容为（或者说， 直接指向）某提交的 SHA-1 值。
 </p>
 </div>
 </li>
-<li><a id="org5cf3404"></a>附注标签<br />
+<li><a id="orgab10117"></a>附注标签<br />
 <div class="outline-text-5" id="text-1-5-2-2">
 <p>
 附注标签会同时产生一个标签引用和一个标签对象。
@@ -647,7 +741,7 @@ ref: refs/heads/master
 </p>
 </div>
 </li>
-<li><a id="org733f227"></a>总结<br />
+<li><a id="org3acbd63"></a>总结<br />
 <div class="outline-text-5" id="text-1-5-2-3">
 <p>
 标签像是一个永不移动的分支引用， 永远指向同一个提交对象， 只不过给这个提交对象加了一个友好的名字罢了。
@@ -658,32 +752,36 @@ ref: refs/heads/master
 </ol>
 </div>
 
-<div id="outline-container-orgba47dfb" class="outline-4">
-<h4 id="orgba47dfb"><span class="section-number-4">1.5.3</span> 远程引用（remote reference）</h4>
+<div id="outline-container-org7adb461" class="outline-4">
+<h4 id="org7adb461"><span class="section-number-4">1.5.3</span> <del>远程引用（remote reference）</del> 远程跟踪分支（remote-tracking branches）</h4>
 <div class="outline-text-4" id="text-1-5-3">
 <p>
-<a href="https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF">Git 分支 - 远程分支</a>
+<a href="https://git-scm.com/book/en/v2/Git-Branching-Remote-Branches">Git Branching - Remote Branches</a>
 </p>
 
 <p>
-如果你添加了一个远程版本库并与其进行通信， Git 会记录下最近一次与远程分支通信时每一个远程分支的状态， 并保存在 <code>refs/remotes</code> 目录下。
+<b>Note：</b> 原文应该是远程引用，但是我越读感觉就越不对劲，加上上面的英文资料的参考，最终决定将这一小节的标题改为远程跟踪分支。
 </p>
 
 <p>
-远程引用和分支（位于 <code>refs/heads</code> 目录下的引用）之间最主要的区别在于，远程引用是只读的。 虽然可以 <code>git checkout</code> 到某个远程引用，但是 Git 并不会将 HEAD 引用指向该远程引用。因此，你永远不能通过 <code>commit</code> 命令来更新远程引用。 Git 将这些远程引用作为记录远程服务器上各分支最后已知位置状态的书签来管理。
+下面我将以我自己的理解解释下面各术语：
+</p>
+
+<p>
+<b>远程引用</b> ：远程引用是远程仓库中的引用，包括远程分支、远程标签等其他引用。通过显式调用 <code>git ls-remote [remote]</code> 或者 <code>git remote show [remote]</code> 来显示远程分支，远程标签等更多信息。此命令与本地仓库情况无关。
+</p>
+
+<p>
+<b>远程跟踪引用</b> :远程跟踪仓库是本地位于 <code>.git/refs/remotes</code> 目录下的引用（分支，标签），用来引用远程仓库的状态，它们是我们不能移动的本地引用（只读），只有在进行网络通信操作时，它们会自动移动，用来记录上次通信时远程仓库的状态。
 </p>
 </div>
-</div>
-
-<div id="outline-container-org017875b" class="outline-4">
-<h4 id="org017875b"><span class="section-number-4">1.5.4</span> <span class="todo TODO">TODO</span> 完善远程引用部分</h4>
 </div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Zerxoi</p>
-<p class="date">Created: 2019-04-25 Thu 00:12</p>
+<p class="date">Created: 2019-04-25 Thu 15:04</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

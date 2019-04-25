@@ -1,4 +1,5 @@
-* Git 内部原理（上）
+#+TITLE:Chapter 2. Git内部原理
+* Git 内部原理
 ** 前言
 虽然内部原理这部分内容对于初学者而言可能有点难以理解且过于复杂，但是内部原理的学习对于理解Git的用途和强大至关重要，所以把这一步部分放在前面。
 
@@ -50,7 +51,7 @@ $ tree .git
 + =config= 文件包含项目特有的配置选项;
 + =info= 目录包含一个全局性排除（global exclude）文件，用以放置那些不
   希望被记录在 .gitignore 文件中的忽略模式（ignored patterns）;
-+ =hooks= 目录包含客户端或服务端的钩子脚本（hook scripts）;
++ =hooks= 目录包含客户端或服务端的钩子脚本（hook scripts）, Git 能在特定的重要动作发生时触发自定义脚本。;
 + =objects= 目录存储所有数据内容；
 + =refs= 目录存储指向数据（分支）的提交对象的指针；
 + =HEAD= 文件指示目前被检出的分支；
@@ -58,9 +59,7 @@ $ tree .git
 
 本章，我们将会把重点主要放在后4个文件及目录身上。
 
-*** TODO 添加 =branchs= 目录的功能。
-*** TODO 了解 =hooks= 中钩子的用处。
-
+*** TODO 添加 =branches= 目录的功能。
 ** Git 对象
 [[https://git-scm.com/book/zh/v2/Git-%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86-Git-%E5%AF%B9%E8%B1%A1][Git 内部原理 - Git 对象]]
 
@@ -77,6 +76,19 @@ f064cb230929237667dedd12c360389743003e6d
 =-w= 选项指示 =hash-object= 命令存储数据对象；若不指定此选项，则该命令 仅返回对应的键值。 =--stdin= 选项则指示该命令从标准输入读取内容；若不 指定此选项，则须在命令尾部给出待存储文件的路径。
 
 该命令输出一个长度为 40 个字符的校验和。 这是一个 SHA-1 哈希值——一个将待存储的数据外加一个头部信息（header）一起做 SHA-1 校验运算而得的校验和。
+
+校验和计算过程简化
+#+BEGIN_EXAMPLE
+>> content = "what is up, doc?"
+>> header = "blob #{content.length}\0"
+=> "blob 16\u000"
+>> store = header + content
+=> "blob 16\u000what is up, doc?"
+>> sha1 = Digest::SHA1.hexdigest(store)
+=> "bd9dbf5aae1a3862dd1526723246b20206e5fc37"
+#+END_EXAMPLE
+
+详细过程见 [Git 对象 - 对象存储]
 
 现在查看 Git 是如何存储数据的。
 #+BEGIN_EXAMPLE
@@ -103,7 +115,6 @@ Zerxoi
 $ git cat-file -t f064cb230929237667dedd12c360389743003e6d 
 blob
 #+END_EXAMPLE
-**** TODO 外加的头部信息是什么？
 *** 树对象（tree object）
 接下来要探讨的对象类型是 _树对象（tree object）_ ，它能解决文件名保存的问题，也允许我们将多个文件组织到一起。 一个树对象包含了一条或多条 *树对象记录（tree entry）* ，每条记录含有一个指向数据对象或者子树对象的SHA-1 指针，以及相应的模式、类型、文件名信息。 例如，某项目当前对应的最新树对象可能是这样的：
 
@@ -190,7 +201,7 @@ _分支就是个引用文件文件， 位于 =.git/refs/= 目录中， 文件的
 *** HEAD 引用（HEAD reference）
 现在的问题是，当你执行 =git branch (branchname)= 时，Git 如何知道最新提交的 SHA-1 值呢？ 答案是 HEAD 文件。
 
-HEAD 文件是一个 *符号引用（symbolic references）*, 位于 =.git/HEAD=, 指向目前所在的分支。
+HEAD 文件 _通常_ 是一个 *符号引用（symbolic references）*, 位于 =.git/HEAD=, 指向目前所在的分支。
 
 所谓符号引用，意味着他并不像普通的引用那样包含一个 SHA-1 值——它是一个指向其他引用的指针。如果查看 HEAD 文件， 一般而言我们看到的内容类似这样：
 #+BEGIN_EXAMPLE
@@ -199,7 +210,60 @@ ref: refs/heads/master
 #+END_EXAMPLE
 
 当我们执行 =git commit= 时，该命令会创建一个提交对象，并用 HEAD 文件中那个引用所指向的 SHA-1 值设置其父提交字段。
-**** TODO detached HEAD
+**** detached HEAD
+[[https://git-scm.com/docs/git-checkout][git-checkout DETACHED HEAD]]
+
+如果足够细心的话，会看见 =HEAD 文件 _通常_ 是一个符号引用（symbolic references）= ，中的通常加了下划线用以强调，也就是说HEAD也可以不指向某一分支。
+
+这就是本小结要引出的 =detached HEAD= 。
+
+通常情况下 HEAD 引用一个分支，分支指向一个特定的提交，此时我们称 HEAD 间接引用提交。如下图，HEAD 引用 =master= 分支， =master= 引用 =commit 'd'=。
+#+BEGIN_EXAMPLE
+               HEAD (refers to branch 'master')
+                |
+                v
+a---b---c---d  branch 'master' (refers to commit 'd')
+    ^
+    |
+  tag 'v2.0' (refers to commit 'b')
+#+END_EXAMPLE
+
+HEAD 直接引用提交，就是我们所说的 =detached HEAD= 。如下图， HEAD 直接引用 =commit 'b'= 。
+#+BEGIN_EXAMPLE
+   HEAD (refers to commit 'b')
+    |
+    v
+a---b---c---d  branch 'master' (refers to commit 'd')
+    ^
+    |
+  tag 'v2.0' (refers to commit 'b')
+#+END_EXAMPLE
+
+我们可以在 =detached HEAD= 上做任何 Git 操作， 如果连续提交两个 =commit= 后，会处于如下状态。
+#+BEGIN_EXAMPLE
+	 HEAD (refers to commit 'f')
+	  |
+	  v
+      e---f
+     /
+a---b---c---d  branch 'master' (refers to commit 'd')
+    ^
+    |
+  tag 'v2.0' (refers to commit 'b')
+#+END_EXAMPLE
+
+同时，我们也要知道 Git 是有 *垃圾回收机制（garbage collection process）* 的，如果我们将 HEAD 指向 =master= 分支， =commit 'e'= 和 =commit 'f'= 就没有任何引用，因此会被回收。
+**** 其他 HEAD 引用
+[[https://git-scm.com/docs/gitrevisions][gitrevisions]]
+
+=FETCH_HEAD= records the branch which you fetched from a remote repository with your last git fetch invocation. 
+
+=ORIG_HEAD= is created by commands that move your HEAD in a drastic way, to record the position of the HEAD before their operation, so that you can easily change the tip of the branch back to the state before you ran them. 
+*Note: 危险操作恢复。*
+
+=MERGE_HEAD= records the commit(s) which you are merging into your branch when you run git merge. 
+
+=CHERRY_PICK_HEAD= records the commit which you are cherry-picking when you run git cherry-pick.
 *** 标签引用（tag reference）
 **** 轻量标签
 轻量标签只有一个 *标签引用*，标签引用位于 =.git/refs/tags/= 中，内容为（或者说， 直接指向）某提交的 SHA-1 值。
@@ -211,11 +275,13 @@ ref: refs/heads/master
 标签像是一个永不移动的分支引用， 永远指向同一个提交对象， 只不过给这个提交对象加了一个友好的名字罢了。
 另外要注意的是，标签对象并非必须指向某个提交对象；你可以对任意类型的 Git 对象打标签。
 
-*** 远程引用（remote reference）
-[[https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF][Git 分支 - 远程分支]]
+*** +远程引用（remote reference）+ 远程跟踪分支（remote-tracking branches）
+[[https://git-scm.com/book/en/v2/Git-Branching-Remote-Branches][Git Branching - Remote Branches]]
 
-如果你添加了一个远程版本库并与其进行通信， Git 会记录下最近一次与远程分支通信时每一个远程分支的状态， 并保存在 =refs/remotes= 目录下。
+*Note：* 原文应该是远程引用，但是我越读感觉就越不对劲，加上上面的英文资料的参考，最终决定将这一小节的标题改为远程跟踪分支。
 
-远程引用和分支（位于 =refs/heads= 目录下的引用）之间最主要的区别在于，远程引用是只读的。 虽然可以 =git checkout= 到某个远程引用，但是 Git 并不会将 HEAD 引用指向该远程引用。因此，你永远不能通过 =commit= 命令来更新远程引用。 Git 将这些远程引用作为记录远程服务器上各分支最后已知位置状态的书签来管理。
+下面我将以我自己的理解解释下面各术语：
 
-*** TODO 完善远程引用部分
+*远程引用* ：远程引用是远程仓库中的引用，包括远程分支、远程标签等其他引用。通过显式调用 =git ls-remote [remote]= 或者 =git remote show [remote]= 来显示远程分支，远程标签等更多信息。此命令与本地仓库情况无关。
+
+*远程跟踪引用* :远程跟踪仓库是本地位于 =.git/refs/remotes= 目录下的引用（分支，标签），用来引用远程仓库的状态，它们是我们不能移动的本地引用（只读），只有在进行网络通信操作时，它们会自动移动，用来记录上次通信时远程仓库的状态。
