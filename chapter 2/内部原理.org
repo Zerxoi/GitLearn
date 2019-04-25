@@ -201,6 +201,8 @@ _分支就是个引用文件文件， 位于 =.git/refs/= 目录中， 文件的
 *** HEAD 引用（HEAD reference）
 现在的问题是，当你执行 =git branch (branchname)= 时，Git 如何知道最新提交的 SHA-1 值呢？ 答案是 HEAD 文件。
 
+HEAD 是一个指针， 指示 Git 用户当前所在的位置， HEAD 所指向的位置用 HEAD 文件来表示。
+
 HEAD 文件 _通常_ 是一个 *符号引用（symbolic references）*, 位于 =.git/HEAD=, 指向目前所在的分支。
 
 所谓符号引用，意味着他并不像普通的引用那样包含一个 SHA-1 值——它是一个指向其他引用的指针。如果查看 HEAD 文件， 一般而言我们看到的内容类似这样：
