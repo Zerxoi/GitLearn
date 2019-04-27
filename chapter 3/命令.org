@@ -1,0 +1,202 @@
+#+TITLE: 命令
+* 命令 
+** 基本篇
+*** =init=
+[[https://git-scm.com/docs/git-init][git-init]] / =git help init=
+
+*git-init - 创建一个空的Git存储库或重新初始化现有存储库*
+**** 描述
+该命令创建一个空的 Git 存储库 —— 基本地包含 =objects= ， =refs/heads= , =refs/tags= 子目录和一些模板文件（详见模板目录）的 =.git= 目录。 初始化后的 =HEAD= 文件默认是指向 =master= 分支。
+
+=git init= 在现存目录运行也是安全的。他不会覆盖已经存在的内容， 运行 =git init= 的主要原因是获取新加入的模板文件（或给定 =--separate-git-dir= 选项仓库移动到别处）。
+
+**** 模板目录
+模板目录中的文件名或目录名只有不以 =.= 开头， 在 =.git= 目录建立之后就会被复制到其中。 模板目录默认为 =/usr/share/git-core/templates= 。
+#+BEGIN_EXAMPLE
+$ tree /usr/share/git-core/templates/ 
+/usr/share/git-core/templates/
+├── branches
+├── description
+├── hooks
+│   ├── applypatch-msg.sample
+│   ├── commit-msg.sample
+│   ├── fsmonitor-watchman.sample
+│   ├── post-update.sample
+│   ├── pre-applypatch.sample
+│   ├── pre-commit.sample
+│   ├── prepare-commit-msg.sample
+│   ├── pre-push.sample
+│   ├── pre-rebase.sample
+│   ├── pre-receive.sample
+│   └── update.sample
+└── info
+    └── exclude
+#+END_EXAMPLE
+*** =status=
+[[https://git-scm.com/docs/git-status][git-status]] / =git help status=
+
+*git-status - 显示工作目录（working tree）状态*
+**** 描述
+显示 =index= 文件与当前 HEAD 提交之间存在差异的路径， =working tree= 与 =index= 文件之间存在差异的路径，以及工作树中未由 Git 跟踪的路径。
+**** 文件状态
+***** Untracked files
+未被 Git 追踪的文件， 
+
+指新加入至工作目录（working tree）的文件或目录， 而没有加入缓存区（index）， 用于下次提交（commit）。
+
+解决： 
++ =git add <file>...= 将文件添加至缓存区（index）。
+***** Changes not staged for commit
+文件已被缓存过（Note：没有被缓存的话应该是 Untracked files状态了），但是在工作目录（working tree）中有被修改， 修改还未被缓存。
+
+本质上就是缓存区（index）文件和工作目录（working tree）中对应的文件有区别， 即 =git diff= 中存在不同。
+
+解决：
++ =git add <file>...= 将修改后的文件添加至缓存区（index）。
++ =git checkout -- <file>...= 将缓存区（index）中覆盖至工作目录（working tree）中对应的文件， 用来取消工作目录（working tree）中的修改， 与 =git add <file>...= 是一对互逆操作。
+
+***** Changes to be committed
+缓存区（index）中的文件与 HEAD 所指中对应的文件有差异， 即 =git diff --chached= 存在不同。 
+
+解决：
++ =git reset HEAD <file>...= 将缓存区（index）中对应的文件恢复至 HEAD 所指向的树对象对应的转状态。
+*** =add=
+[[https://git-scm.com/docs/git-add][git-add]] / =git help add=
+
+*git-add - 将文件内容添加至缓存区（index）*
+**** 描述
+该命令用当前工作目录（working tree）中的内容来更新缓存区（index），用来缓存下次提交的内容。它通常讲所指定现存路径中的内容全部添加至缓存区，但是通过某些选项它还可以用于添加在 =work tree= 中内容相对 =inde= 中有所更改的文件或者删除 =index= 中存在而在 =working tree= 不存在的文件。
+
+=index= 是 =working tree= 的一个快照， 它讲作为下次提交的内容。因此在对 =working tree= 中的内容作了修改且还未被提交， 一定要用 =git add= 命令将修改后的文件和新文件添加到 =index= 。
+
+默认情况下， =git add= 命令不会添加被忽略的文件。如果在命令行中显式指定了任何被忽略的文件， =git add= 将失败并显示被忽略文件的列表。由 Git 执行的目录递归或文件名通配所达到的忽略文件将被默默忽略。 =git add= 命令可用于使用 =-f= （force）选项添加被忽略的文件。
+
+*** =commit=
+[[https://git-scm.com/docs/git-commit][git-commit]] / =git help commit=
+
+*git-commit - 将变更记录到存储库*
+**** 描述
+创建一个新的提交，包含 =index= 中的当前内容和给定的日志消息用于描述改变。新提交是当前 HEAD 所指提交的直接子提交。通常 HEAD 是指向某一分支的， 若有新提交出现，分支会指向该新提交；若 HEAD 是 detached HEAD 的话， HEAD 会直接指向新提交。
+
+如果
+*** =diff=
+[[https://git-scm.com/docs/git-diff][git-diff]] / =git help diff=
+
+*git-diff - 展示工作目录（working tree）和缓存区（index），缓存区（index）和提交（commit），提交（commit）和提交（commit）之间等等之间的区别。*
+**** 描述
+展示工作目录（working tree）和缓存区（index）或某一树对象的区别，缓存区（index）和某一树对象（tree object）的区别，两个树对象（tree object）之间的区别，两个数据对象（blob object）之间的区别，甚至磁盘上两个文件之间的区别。
+#+BEGIN_EXAMPLE
+git diff [<options>] [--] [<path>…​]
+#+END_EXAMPLE
+展示工作目录（working tree）中文件与缓存区（index）中文件的区别。
+#+BEGIN_EXAMPLE
+git diff [<options>] --no-index [--] <path> <path>
+#+END_EXAMPLE
+展示文件系统中两个文件的区别。
+
+在由 Git 控制的工作目录（working tree）中运行命令时且至少有一个路径在工作目录（working tree）外部可以省略 =--no-index= 选项，或者在 Git 控制目录之外运行该命令时也可以省略 =--no-index= 选项。
+#+BEGIN_EXAMPLE
+git diff [<options>] --cached [<commit>] [--] [<path>…​]
+#+END_EXAMPLE
+展示缓存区（index）中的文件与指定的 =<commit>= 之间的区别。 当没有给定 <commit> 是默认为 HEAD。 如果 HEAD 不存在（没有任何提交）， 它会展示素有缓存区（index）中内容。
+#+BEGIN_EXAMPLE
+git diff [<options>] <commit> [--] [<path>…​]
+#+END_EXAMPLE
+展示工作目录（working tree）中文件和指定提交（commit）之间的区别。 =<commit>= 当然也可以用 HEAD 和 分支来代替， 毕竟它们都是引用提交（commit）的嘛。
+#+BEGIN_EXAMPLE
+git diff [<options>] <commit> <commit> [--] [<path>…​]
+#+END_EXAMPLE
+展示两个任意 <commit> 之间的区别。
+#+BEGIN_EXAMPLE
+git diff [<options>] <commit>..<commit> [--] [<path>…​]
+#+END_EXAMPLE
+和上一个命令基本相似。但是如果一侧的被省略，那么它默认为 HEAD 。
+#+BEGIN_EXAMPLE
+git diff [<options>] <commit>...<commit> [--] [<path>…​]
+#+END_EXAMPLE
+:-(
+#+BEGIN_EXAMPLE
+git diff [<options>] <blob> <blob>
+#+END_EXAMPLE
+展示两个数据对象（blob object）的区别。
+*** =show=
+[[https://git-scm.com/docs/git-show][git-show]] / =git help show=
+
+*git-show - 各种类型的对象*
+**** 描述
+显示一个或多个对象（数据对象， 树对象， 标签对象和提交对象）。如果不指定任何对象， 默认是 HEAD。
+
+对于提交对象， 它展示提交描述和文本差异。如果是合并提交会以 =git diff-tree --cc= 所提供的特殊形式来显示合并提交。
+
+对于标签对象， 它显示标签信息和引用对象。
+
+对于树对象， 它展示对应缓存区中各个文件和子目录的名字。
+
+对于数据对象， 它显示文本内容。
+
+*** =log=
+[[https://git-scm.com/docs/git-log][git-log]] / =git help log=
+
+*git-log - 显示提交日志*
+
+**** 描述
+显示提交日志。
+
+**** 常用
+=git log --all --oneline --graph=
+解释： 
++ =--all= 选项显示 =refs/= 中所有引用和 HEAD 引用， 查看所有分支的提交记录要使用这一选项。 
++ =--oneline= 选项用于简化显示与一行。
++ =--graph= 选项用于绘制提交历史图形表示， 所以就不需要图形界面咯。
+*** =rm=
+[[https://git-scm.com/docs/git-rm][git-rm]] / =git help rm=
+
+*git-rm - 从工作目录（working tree）和缓存区（index）中删除文件*
+**** 描述
+从缓存区（index）或者从缓存区（index）和工作目录（working tree）中删除文件。 然而 =git rm= 并不能只删除工作目录（working tree）中的文件而不删除缓存区（index）中的文件，如果要删除可以用 =/bin/rm= 或者右键删除。
+
+如果要被删除文件在缓存区（index）要与 HEAD 所指提交中对应 文件一致，且工作目录（working tree）能被提交到缓存区（index）的修改， 那么该文件删除时会有提示错误，可以用 =-f= （force）选项强制删除。
+
+当 =--cached= 选项被指定， 则只删除缓存区（index）中对应的文件。
+*** =mv=
+[[https://git-scm.com/docs/git-mv][git-mv]] / =git help mv=
+
+*git-mv - 移动或重命名一个文件， 一个目录或一个符号链接（？）*
+**** 描述
+移动或重命名一个文件， 一个目录或一个符号链接（？）
+#+BEGIN_EXAMPLE
+git mv [-v] [-f] [-n] [-k] <source> <destination>
+git mv [-v] [-f] [-n] [-k] <source> ... <destination directory>
+#+END_EXAMPLE
+第一种形式中， <source> 必须在缓存区（index）中存在且要是文件、目录或者符号链接， 该命令将 <source> 重命名为 <destination>。
+
+第二种形式中， 也要求<source> 必须在缓存区（index）中存在且要是文件、目录或者符号链， 但是最后一个参数要求是一个现存的目录， 该命令将把 <source> 移动到 <destination directory> 中。
+*** 标识符术语
+[[https://mirrors.edge.kernel.org/pub/software/scm/git/docs/#_identifier_terminology][Identifier Terminology]]
+
+虽然已经知道了 Git 中很多相关的术语， 但是帮助手册中的一些术语我觉得还是有必要解释一下， 目的为了更好地理解和使用命令。
+
++ =<object>=
+表示各种类型对象的对象名
++ =<blob>=
+表示一个数据对象（blob object）的对象名
++ =<tree>=
+表示一个树对象（tree object）的对象名
++ =<commit>=
+表示一个提交对象（commit object）的对象名
++ =<tree-ish>=
+表示一个树对象（tree object）， 提交对象（commit object）或者标签对象（tag object）。 =<tree-ish>= 实际上指的是最终指向树对象的对象，通过对该 =<tree-ish>= 解引用， 最终得到一个树对象。
++ =<commit-ish>=
+表示一个提交对象（commit object）或者一个标签对象（tag object）。 =<commit-ish>= 和 =<tree-ish>= 类似， 是指最终引用的是提交对象（commit object）的对象。 
+#+BEGIN_EXAMPLE
+<tag object> -> <commit object> -> <tree object> -> <blob object>
+                                                 -> <sub directory tree object>
+						 -> ...
+#+END_EXAMPLE
+所以是  =<commit-ish>= 一定是 =<tree-ish>= 对象。
++ =<type>=
+表示一个所需对象的类型， 比如 =blob=， =tree= ， =commit= 或者 =tag= 。
++ =<file>=
+表示文件名
+** 分支篇
+** 远程篇
