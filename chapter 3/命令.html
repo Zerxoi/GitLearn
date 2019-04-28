@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-04-27 Sat 13:49 -->
+<!-- 2019-04-28 Sun 19:45 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>命令</title>
@@ -234,39 +234,42 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgee8f41a">1. 命令</a>
+<li><a href="#org2980152">1. 命令</a>
 <ul>
-<li><a href="#orgf45a1d7">1.1. 基本篇</a>
+<li><a href="#orgc9659a9">1.1. 基本篇</a>
 <ul>
-<li><a href="#org285b394">1.1.1. <code>init</code></a></li>
-<li><a href="#org47f2788">1.1.2. <code>status</code></a></li>
-<li><a href="#orga0ebb74">1.1.3. <code>add</code></a></li>
-<li><a href="#org54d9ee9">1.1.4. <code>commit</code></a></li>
-<li><a href="#orgc854649">1.1.5. <code>diff</code></a></li>
-<li><a href="#org2252aeb">1.1.6. <code>show</code></a></li>
-<li><a href="#orgd8a132f">1.1.7. <code>log</code></a></li>
-<li><a href="#orga425cb5">1.1.8. <code>rm</code></a></li>
-<li><a href="#org52fe663">1.1.9. <code>mv</code></a></li>
-<li><a href="#org87b5f6a">1.1.10. 标识符术语</a></li>
+<li><a href="#org31e1890">1.1.1. <code>init</code></a></li>
+<li><a href="#org7fe95a4">1.1.2. <code>status</code></a></li>
+<li><a href="#org14107a8">1.1.3. <code>add</code></a></li>
+<li><a href="#org23e7146">1.1.4. <code>commit</code></a></li>
+<li><a href="#orga52e53d">1.1.5. <code>diff</code></a></li>
+<li><a href="#org6a9a972">1.1.6. <code>show</code></a></li>
+<li><a href="#org88703a9">1.1.7. <code>log</code></a></li>
+<li><a href="#org92f06ed">1.1.8. <code>rm</code></a></li>
+<li><a href="#org88a03cd">1.1.9. <code>mv</code></a></li>
+<li><a href="#org76902b5">1.1.10. 标识符术语</a></li>
+<li><a href="#org1befa82">1.1.11. <code>reset</code></a></li>
+<li><a href="#org0d13cb0">1.1.12. <code>branch</code></a></li>
+<li><a href="#orgcbfb710">1.1.13. <code>checkout</code></a></li>
 </ul>
 </li>
-<li><a href="#org0b0729f">1.2. 分支篇</a></li>
-<li><a href="#orgab0925f">1.3. 远程篇</a></li>
+<li><a href="#org76708d5">1.2. 分支篇</a></li>
+<li><a href="#org53d903c">1.3. 远程篇</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgee8f41a" class="outline-2">
-<h2 id="orgee8f41a"><span class="section-number-2">1</span> 命令</h2>
+<div id="outline-container-org2980152" class="outline-2">
+<h2 id="org2980152"><span class="section-number-2">1</span> 命令</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orgf45a1d7" class="outline-3">
-<h3 id="orgf45a1d7"><span class="section-number-3">1.1</span> 基本篇</h3>
+<div id="outline-container-orgc9659a9" class="outline-3">
+<h3 id="orgc9659a9"><span class="section-number-3">1.1</span> 基本篇</h3>
 <div class="outline-text-3" id="text-1-1">
 </div>
-<div id="outline-container-org285b394" class="outline-4">
-<h4 id="org285b394"><span class="section-number-4">1.1.1</span> <code>init</code></h4>
+<div id="outline-container-org31e1890" class="outline-4">
+<h4 id="org31e1890"><span class="section-number-4">1.1.1</span> <code>init</code></h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 <a href="https://git-scm.com/docs/git-init">git-init</a> / <code>git help init</code>
@@ -277,7 +280,7 @@ for the JavaScript code in this tag.
 </p>
 </div>
 <ol class="org-ol">
-<li><a id="orgf1a4310"></a>描述<br />
+<li><a id="org3ff624f"></a>描述<br />
 <div class="outline-text-5" id="text-1-1-1-1">
 <p>
 该命令创建一个空的 Git 存储库 —— 基本地包含 <code>objects</code> ， <code>refs/heads</code> , <code>refs/tags</code> 子目录和一些模板文件（详见模板目录）的 <code>.git</code> 目录。 初始化后的 <code>HEAD</code> 文件默认是指向 <code>master</code> 分支。
@@ -289,7 +292,7 @@ for the JavaScript code in this tag.
 </div>
 </li>
 
-<li><a id="org6b0b8c9"></a>模板目录<br />
+<li><a id="org793b724"></a>模板目录<br />
 <div class="outline-text-5" id="text-1-1-1-2">
 <p>
 模板目录中的文件名或目录名只有不以 <code>.</code> 开头， 在 <code>.git</code> 目录建立之后就会被复制到其中。 模板目录默认为 <code>/usr/share/git-core/templates</code> 。
@@ -318,8 +321,8 @@ $ tree /usr/share/git-core/templates/
 </li>
 </ol>
 </div>
-<div id="outline-container-org47f2788" class="outline-4">
-<h4 id="org47f2788"><span class="section-number-4">1.1.2</span> <code>status</code></h4>
+<div id="outline-container-org7fe95a4" class="outline-4">
+<h4 id="org7fe95a4"><span class="section-number-4">1.1.2</span> <code>status</code></h4>
 <div class="outline-text-4" id="text-1-1-2">
 <p>
 <a href="https://git-scm.com/docs/git-status">git-status</a> / <code>git help status</code>
@@ -330,16 +333,16 @@ $ tree /usr/share/git-core/templates/
 </p>
 </div>
 <ol class="org-ol">
-<li><a id="org9e39f60"></a>描述<br />
+<li><a id="org96ed132"></a>描述<br />
 <div class="outline-text-5" id="text-1-1-2-1">
 <p>
 显示 <code>index</code> 文件与当前 HEAD 提交之间存在差异的路径， <code>working tree</code> 与 <code>index</code> 文件之间存在差异的路径，以及工作树中未由 Git 跟踪的路径。
 </p>
 </div>
 </li>
-<li><a id="org1fa6f15"></a>文件状态<br />
+<li><a id="orgbd5433c"></a>文件状态<br />
 <ol class="org-ol">
-<li><a id="orgcef132c"></a>Untracked files<br />
+<li><a id="orgc24e0da"></a>Untracked files<br />
 <div class="outline-text-6" id="text-1-1-2-2-1">
 <p>
 未被 Git 追踪的文件， 
@@ -357,7 +360,7 @@ $ tree /usr/share/git-core/templates/
 </ul>
 </div>
 </li>
-<li><a id="org8acdde5"></a>Changes not staged for commit<br />
+<li><a id="org7f406fb"></a>Changes not staged for commit<br />
 <div class="outline-text-6" id="text-1-1-2-2-2">
 <p>
 文件已被缓存过（Note：没有被缓存的话应该是 Untracked files状态了），但是在工作目录（working tree）中有被修改， 修改还未被缓存。
@@ -377,7 +380,7 @@ $ tree /usr/share/git-core/templates/
 </div>
 </li>
 
-<li><a id="orgefae89c"></a>Changes to be committed<br />
+<li><a id="orgc5039a5"></a>Changes to be committed<br />
 <div class="outline-text-6" id="text-1-1-2-2-3">
 <p>
 缓存区（index）中的文件与 HEAD 所指中对应的文件有差异， 即 <code>git diff --chached</code> 存在不同。 
@@ -395,8 +398,8 @@ $ tree /usr/share/git-core/templates/
 </li>
 </ol>
 </div>
-<div id="outline-container-orga0ebb74" class="outline-4">
-<h4 id="orga0ebb74"><span class="section-number-4">1.1.3</span> <code>add</code></h4>
+<div id="outline-container-org14107a8" class="outline-4">
+<h4 id="org14107a8"><span class="section-number-4">1.1.3</span> <code>add</code></h4>
 <div class="outline-text-4" id="text-1-1-3">
 <p>
 <a href="https://git-scm.com/docs/git-add">git-add</a> / <code>git help add</code>
@@ -407,7 +410,7 @@ $ tree /usr/share/git-core/templates/
 </p>
 </div>
 <ol class="org-ol">
-<li><a id="org6ff568f"></a>描述<br />
+<li><a id="org66e9d5f"></a>描述<br />
 <div class="outline-text-5" id="text-1-1-3-1">
 <p>
 该命令用当前工作目录（working tree）中的内容来更新缓存区（index），用来缓存下次提交的内容。它通常讲所指定现存路径中的内容全部添加至缓存区，但是通过某些选项它还可以用于添加在 <code>work tree</code> 中内容相对 <code>inde</code> 中有所更改的文件或者删除 <code>index</code> 中存在而在 <code>working tree</code> 不存在的文件。
@@ -425,8 +428,8 @@ $ tree /usr/share/git-core/templates/
 </ol>
 </div>
 
-<div id="outline-container-org54d9ee9" class="outline-4">
-<h4 id="org54d9ee9"><span class="section-number-4">1.1.4</span> <code>commit</code></h4>
+<div id="outline-container-org23e7146" class="outline-4">
+<h4 id="org23e7146"><span class="section-number-4">1.1.4</span> <code>commit</code></h4>
 <div class="outline-text-4" id="text-1-1-4">
 <p>
 <a href="https://git-scm.com/docs/git-commit">git-commit</a> / <code>git help commit</code>
@@ -437,7 +440,7 @@ $ tree /usr/share/git-core/templates/
 </p>
 </div>
 <ol class="org-ol">
-<li><a id="org2472016"></a>描述<br />
+<li><a id="orgf6d7b3b"></a>描述<br />
 <div class="outline-text-5" id="text-1-1-4-1">
 <p>
 创建一个新的提交，包含 <code>index</code> 中的当前内容和给定的日志消息用于描述改变。新提交是当前 HEAD 所指提交的直接子提交。通常 HEAD 是指向某一分支的， 若有新提交出现，分支会指向该新提交；若 HEAD 是 detached HEAD 的话， HEAD 会直接指向新提交。
@@ -450,8 +453,8 @@ $ tree /usr/share/git-core/templates/
 </li>
 </ol>
 </div>
-<div id="outline-container-orgc854649" class="outline-4">
-<h4 id="orgc854649"><span class="section-number-4">1.1.5</span> <code>diff</code></h4>
+<div id="outline-container-orga52e53d" class="outline-4">
+<h4 id="orga52e53d"><span class="section-number-4">1.1.5</span> <code>diff</code></h4>
 <div class="outline-text-4" id="text-1-1-5">
 <p>
 <a href="https://git-scm.com/docs/git-diff">git-diff</a> / <code>git help diff</code>
@@ -462,7 +465,7 @@ $ tree /usr/share/git-core/templates/
 </p>
 </div>
 <ol class="org-ol">
-<li><a id="org309b179"></a>描述<br />
+<li><a id="org41bad58"></a>描述<br />
 <div class="outline-text-5" id="text-1-1-5-1">
 <p>
 展示工作目录（working tree）和缓存区（index）或某一树对象的区别，缓存区（index）和某一树对象（tree object）的区别，两个树对象（tree object）之间的区别，两个数据对象（blob object）之间的区别，甚至磁盘上两个文件之间的区别。
@@ -521,10 +524,25 @@ git diff [&lt;options&gt;] &lt;blob&gt; &lt;blob&gt;
 </p>
 </div>
 </li>
+<li><a id="org0a74c0c"></a>输出内容解释<br />
+<div class="outline-text-5" id="text-1-1-5-2">
+<pre class="example">
+$ git diff
+diff --git a/test b/test # 表示对比的两个文件名
+index 29d14e6..1f8c977 100644 # index 后面为两个文件的 SHA-1 值， 最后一个表示文件属性，文件权限
+--- a/test # 前一个文件是修改前文件
++++ b/test # 后一个文件是修改后文件
+@@ -1,3 +1,2 @@ # -1,3 修改前文件从第1行开始到第3行 / +1,2 修改后文件从第1行开始到第2行
+ 
+ 2
+-
+</pre>
+</div>
+</li>
 </ol>
 </div>
-<div id="outline-container-org2252aeb" class="outline-4">
-<h4 id="org2252aeb"><span class="section-number-4">1.1.6</span> <code>show</code></h4>
+<div id="outline-container-org6a9a972" class="outline-4">
+<h4 id="org6a9a972"><span class="section-number-4">1.1.6</span> <code>show</code></h4>
 <div class="outline-text-4" id="text-1-1-6">
 <p>
 <a href="https://git-scm.com/docs/git-show">git-show</a> / <code>git help show</code>
@@ -535,7 +553,7 @@ git diff [&lt;options&gt;] &lt;blob&gt; &lt;blob&gt;
 </p>
 </div>
 <ol class="org-ol">
-<li><a id="orga5846d2"></a>描述<br />
+<li><a id="org2ed43ce"></a>描述<br />
 <div class="outline-text-5" id="text-1-1-6-1">
 <p>
 显示一个或多个对象（数据对象， 树对象， 标签对象和提交对象）。如果不指定任何对象， 默认是 HEAD。
@@ -561,8 +579,8 @@ git diff [&lt;options&gt;] &lt;blob&gt; &lt;blob&gt;
 </ol>
 </div>
 
-<div id="outline-container-orgd8a132f" class="outline-4">
-<h4 id="orgd8a132f"><span class="section-number-4">1.1.7</span> <code>log</code></h4>
+<div id="outline-container-org88703a9" class="outline-4">
+<h4 id="org88703a9"><span class="section-number-4">1.1.7</span> <code>log</code></h4>
 <div class="outline-text-4" id="text-1-1-7">
 <p>
 <a href="https://git-scm.com/docs/git-log">git-log</a> / <code>git help log</code>
@@ -574,7 +592,7 @@ git diff [&lt;options&gt;] &lt;blob&gt; &lt;blob&gt;
 </div>
 
 <ol class="org-ol">
-<li><a id="orgb925a1f"></a>描述<br />
+<li><a id="org279ec52"></a>描述<br />
 <div class="outline-text-5" id="text-1-1-7-1">
 <p>
 显示提交日志。
@@ -582,7 +600,7 @@ git diff [&lt;options&gt;] &lt;blob&gt; &lt;blob&gt;
 </div>
 </li>
 
-<li><a id="org8617f9f"></a>常用<br />
+<li><a id="orgd03e4a5"></a>常用<br />
 <div class="outline-text-5" id="text-1-1-7-2">
 <p>
 <code>git log --all --oneline --graph</code>
@@ -597,8 +615,8 @@ git diff [&lt;options&gt;] &lt;blob&gt; &lt;blob&gt;
 </li>
 </ol>
 </div>
-<div id="outline-container-orga425cb5" class="outline-4">
-<h4 id="orga425cb5"><span class="section-number-4">1.1.8</span> <code>rm</code></h4>
+<div id="outline-container-org92f06ed" class="outline-4">
+<h4 id="org92f06ed"><span class="section-number-4">1.1.8</span> <code>rm</code></h4>
 <div class="outline-text-4" id="text-1-1-8">
 <p>
 <a href="https://git-scm.com/docs/git-rm">git-rm</a> / <code>git help rm</code>
@@ -609,7 +627,7 @@ git diff [&lt;options&gt;] &lt;blob&gt; &lt;blob&gt;
 </p>
 </div>
 <ol class="org-ol">
-<li><a id="orgf6069b4"></a>描述<br />
+<li><a id="org39f74ed"></a>描述<br />
 <div class="outline-text-5" id="text-1-1-8-1">
 <p>
 从缓存区（index）或者从缓存区（index）和工作目录（working tree）中删除文件。 然而 <code>git rm</code> 并不能只删除工作目录（working tree）中的文件而不删除缓存区（index）中的文件，如果要删除可以用 <code>/bin/rm</code> 或者右键删除。
@@ -626,8 +644,8 @@ git diff [&lt;options&gt;] &lt;blob&gt; &lt;blob&gt;
 </li>
 </ol>
 </div>
-<div id="outline-container-org52fe663" class="outline-4">
-<h4 id="org52fe663"><span class="section-number-4">1.1.9</span> <code>mv</code></h4>
+<div id="outline-container-org88a03cd" class="outline-4">
+<h4 id="org88a03cd"><span class="section-number-4">1.1.9</span> <code>mv</code></h4>
 <div class="outline-text-4" id="text-1-1-9">
 <p>
 <a href="https://git-scm.com/docs/git-mv">git-mv</a> / <code>git help mv</code>
@@ -638,7 +656,7 @@ git diff [&lt;options&gt;] &lt;blob&gt; &lt;blob&gt;
 </p>
 </div>
 <ol class="org-ol">
-<li><a id="org220e097"></a>描述<br />
+<li><a id="org15069e3"></a>描述<br />
 <div class="outline-text-5" id="text-1-1-9-1">
 <p>
 移动或重命名一个文件， 一个目录或一个符号链接（？）
@@ -658,8 +676,8 @@ git mv [-v] [-f] [-n] [-k] &lt;source&gt; ... &lt;destination directory&gt;
 </li>
 </ol>
 </div>
-<div id="outline-container-org87b5f6a" class="outline-4">
-<h4 id="org87b5f6a"><span class="section-number-4">1.1.10</span> 标识符术语</h4>
+<div id="outline-container-org76902b5" class="outline-4">
+<h4 id="org76902b5"><span class="section-number-4">1.1.10</span> 标识符术语</h4>
 <div class="outline-text-4" id="text-1-1-10">
 <p>
 <a href="https://mirrors.edge.kernel.org/pub/software/scm/git/docs/#_identifier_terminology">Identifier Terminology</a>
@@ -727,18 +745,175 @@ git mv [-v] [-f] [-n] [-k] &lt;source&gt; ... &lt;destination directory&gt;
 </p>
 </div>
 </div>
+<div id="outline-container-org1befa82" class="outline-4">
+<h4 id="org1befa82"><span class="section-number-4">1.1.11</span> <code>reset</code></h4>
+<div class="outline-text-4" id="text-1-1-11">
+<p>
+<a href="https://git-scm.com/docs/git-reset">git-reset</a> / <code>git help reset</code>
+</p>
+
+<p>
+<b>git-reset - 重置当前 HEAD 到指定状态</b>
+</p>
 </div>
-<div id="outline-container-org0b0729f" class="outline-3">
-<h3 id="org0b0729f"><span class="section-number-3">1.2</span> 分支篇</h3>
+<ol class="org-ol">
+<li><a id="org675b34a"></a>描述<br />
+<div class="outline-text-5" id="text-1-1-11-1">
+<pre class="example">
+git reset [-q] [&lt;tree-ish&gt;] [--] &lt;paths&gt;…​
+git reset (--patch | -p) [&lt;tree-ish&gt;] [--] [&lt;paths&gt;…​]
+git reset [--soft | --mixed [-N] | --hard | --merge | --keep] [-q] [&lt;commit&gt;]
+</pre>
+<p>
+第一种和第二种形式是将 <code>&lt;tree-ish&gt;</code> 中的项复制到缓存区（index）。
+</p>
+
+<p>
+第三种形式中， 若 HEAD 非 detached HEAD 则将 HEAD 所指向的分支指向指定 &lt;commit&gt; ； 若 HEAD 为 detached HEAD 则将 HEAD 指向指定 &lt;commit&gt; ， 我也可以通过选项配置将工作目录（working tree）或者缓存区（index）也指向指定 &lt;commit&gt;。
+</p>
+
+<p>
+上述三个命令中， &lt;tree-ish&gt; / &lt;commit&gt; 默认都是 HEAD。
+</p>
+<pre class="example">
+git reset [-q] [&lt;tree-ish&gt;] [--] &lt;paths&gt;…​
+</pre>
+<p>
+此形式将缓存区中所有的 <code>&lt;paths&gt;</code> 重置成其在 <code>&lt;tree-ish&gt;</code> 对应的状态。（它并不影响工作目录（working tree）或者当前分支。）
+</p>
+
+<p>
+这一位置 <code>git reset &lt;paths&gt;</code> 和 <code>git add &lt;paths&gt;</code> 是一对互逆操作。 <code>git add &lt;paths&gt;</code> 对缓存区增删改文件， 而 <code>git reset &lt;paths&gt;</code> 将缓存区恢复到初态。
+</p>
+
+<p>
+再运行 <code>git reset &lt;paths&gt;</code> 去更新缓存区项后， 可用使用 <code>git checkout</code> 命令来将缓存区（index）中的内容检出到工作目录（working tree）。 另外使用 <code>git checkout</code> 并指定一个 <code>&lt;commit&gt;</code> 还可以同时将指定 <code>&lt;paths&gt;</code> 中的内容移出至工作目录（working tree）和缓存区（index）。
+</p>
+
+<pre class="example">
+git reset (--patch | -p) [&lt;tree-ish&gt;] [--] [&lt;paths&gt;…​]
+</pre>
+<p>
+凭借缓存区（index）和指定 <code>&lt;tree-ish&gt;</code> 的差异， 交互式地选择 <code>hunks</code> （片段）, 并将 <code>hunks</code> （片段）反作用在 <code>index</code> 上。
+</p>
+
+<p>
+所谓反作用就是变动前是缓存（index）区内容，变动后是指定 <code>&lt;tree-ish&gt;</code> 的内容（ 而 <code>hunks</code> （片段）上显示的却是变动前是 <code>&lt;tree-ish&gt;</code> 内容， 变动后是缓存区（index）内容， 这也是为什么说是反作用）。
+</p>
+
+<pre class="example">
+git reset [&lt;mode&gt;] [&lt;commit&gt;]
+</pre>
+<p>
+此形式将当前分支或 <code>HEAD</code> 指向指定的 <code>&lt;commit&gt;</code>, 根据 <code>&lt;mode&gt;</code> 选项可能会同时更新缓存区（index）和工作目录（working tree）， 将它们重置成指定 <code>&lt;commit&gt;</code> 中的内容。 如果 <code>&lt;mode&gt;</code> 被忽略， 默认是 <code>--mixed</code> 。
+</p>
+
+<p>
+&lt;mode&gt; 选项介绍
+</p>
+<ul class="org-ul">
+<li><code>--soft</code></li>
+</ul>
+<p>
+不修改缓存区（index）或工作目录（working tree）。
+</p>
+
+<ul class="org-ul">
+<li><code>--mixed</code></li>
+</ul>
+<p>
+将缓存区（index）而不将工作目录（working tree）中的内容重置成指定 <code>&lt;commit&gt;</code> 的内容。
+</p>
+
+<p>
+因此 <code>git diff --cached</code> 一定无内容， 而 <code>git diff</code> 一般则会有输出。
+</p>
+
+<ul class="org-ul">
+<li><code>--hard</code></li>
+</ul>
+<p>
+将缓存区（index）和工作目录（working tree）中的内容重置成指定 <code>&lt;commit&gt;</code> 的内容。 工作目录（working tree）中被追中的文件中的变更都将会被取消。
+</p>
 </div>
-<div id="outline-container-orgab0925f" class="outline-3">
-<h3 id="orgab0925f"><span class="section-number-3">1.3</span> 远程篇</h3>
+</li>
+<li><a id="org77cd9bd"></a><code>&lt;mode&gt;</code> 模式补充<br /></li>
+</ol>
+</div>
+<div id="outline-container-org0d13cb0" class="outline-4">
+<h4 id="org0d13cb0"><span class="section-number-4">1.1.12</span> <code>branch</code></h4>
+<div class="outline-text-4" id="text-1-1-12">
+<p>
+<a href="https://git-scm.com/docs/git-branch">git-branch</a> / <code>git help branch</code>
+</p>
+
+<p>
+<b>git-branch - 列出、创建或删除分支</b>
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org0875763"></a>描述<br />
+<div class="outline-text-5" id="text-1-1-12-1">
+<pre class="example">
+git branch [--color[=&lt;when&gt;] | --no-color] [-r | -a]
+	[--list] [-v [--abbrev=&lt;length&gt; | --no-abbrev]]
+	[--column[=&lt;options&gt;] | --no-column] [--sort=&lt;key&gt;]
+	[(--merged | --no-merged) [&lt;commit&gt;]]
+	[--contains [&lt;commit]] [--no-contains [&lt;commit&gt;]]
+	[--points-at &lt;object&gt;] [--format=&lt;format&gt;] [&lt;pattern&gt;…​]
+git branch [--track | --no-track] [-f] &lt;branchname&gt; [&lt;start-point&gt;]
+git branch (--set-upstream-to=&lt;upstream&gt; | -u &lt;upstream&gt;) [&lt;branchname&gt;]
+git branch --unset-upstream [&lt;branchname&gt;]
+git branch (-m | -M) [&lt;oldbranch&gt;] &lt;newbranch&gt;
+git branch (-c | -C) [&lt;oldbranch&gt;] &lt;newbranch&gt;
+git branch (-d | -D) [-r] &lt;branchname&gt;…​
+git branch --edit-description [&lt;branchname&gt;]
+</pre>
+<p>
+如果给定 <code>--list</code> 选项或者没有任何选项， 那么就会把所有存在分支列出， 且当前分支将以星号突出显示。
+</p>
+
+<p>
+给定 <code>-r</code> 选项会列出远程跟踪分支， 选项 <code>-a</code> 会同时显示本地和远程分支。
+</p>
+
+<p>
+给定 <code>--contains</code> 选项还显示包含给定提交的分支（ <b>换句话说就是哪个分支所指向的提交是指定提交的后代，就显示哪个分支</b> ）， <code>--no-contains</code> 则相反。
+</p>
+</div>
+</li>
+
+<li><a id="orgc443604"></a><span class="todo TODO">TODO</span> <code>--merged</code> 补充<br /></li>
+</ol>
+</div>
+<div id="outline-container-orgcbfb710" class="outline-4">
+<h4 id="orgcbfb710"><span class="section-number-4">1.1.13</span> <code>checkout</code></h4>
+<div class="outline-text-4" id="text-1-1-13">
+<p>
+<a href="https://git-scm.com/docs/git-checkout">git-checkout</a> / <code>git help checkout</code>
+</p>
+
+<p>
+<b>git-checkout - 切换分支或者恢复工作目录（working tree）文件。</b>
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="orgd698009"></a>描述<br /></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org76708d5" class="outline-3">
+<h3 id="org76708d5"><span class="section-number-3">1.2</span> 分支篇</h3>
+</div>
+<div id="outline-container-org53d903c" class="outline-3">
+<h3 id="org53d903c"><span class="section-number-3">1.3</span> 远程篇</h3>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Zerxoi</p>
-<p class="date">Created: 2019-04-27 Sat 13:49</p>
+<p class="date">Created: 2019-04-28 Sun 19:45</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
