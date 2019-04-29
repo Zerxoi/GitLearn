@@ -207,7 +207,7 @@ git mv [-v] [-f] [-n] [-k] <source> ... <destination directory>
 #+END_EXAMPLE
 所以是  =<commit-ish>= 一定是 =<tree-ish>= 对象。
 + =<type>=
-表示一个所需对象的类型， 比如 =blob=， =tree= ， =commit= 或者 =tag= 。
+表示一个所需对象的类型， 比如 =blob= ， =tree= ， =commit= 或者 =tag= 。
 + =<file>=
 表示文件名
 *** =reset=
@@ -257,7 +257,7 @@ git reset [<mode>] [<commit>]
 
 + =--hard=
 将缓存区（index）和工作目录（working tree）中的内容重置成指定 =<commit>= 的内容。 工作目录（working tree）中被追中的文件中的变更都将会被取消。
-**** =<mode>= 模式补充
+**** TODO =<mode>= 模式补充
 *** =branch=
 [[https://git-scm.com/docs/git-branch][git-branch]] / =git help branch=
 
@@ -284,6 +284,9 @@ git branch --edit-description [<branchname>]
 
 给定 =--contains= 选项还显示包含给定提交的分支（ *换句话说就是哪个分支所指向的提交是指定提交的后代，就显示哪个分支* ）， =--no-contains= 则相反。
 
+第二种形式如果给定 =<start-point>= 参数会在 =<start-point>= 出创建一个名为 =<branchname>= 的分支； 如果为给定 =<start-point>= 则会在当前 HEAD 所指处创建 =<branchname>= 分支。 *Note：该命令并不会将 HEAD 指向创建分支， 使用 =git checkout <branchname>= 来检出至新分支。*
+
+本地分支从远程跟踪分支启动时， Git 会建立分支（Git 配置 =<branch>.bane.remote= 和 =<branch>.name.merge= 两个配置项）， 以便 =git pull= 从能与远程跟踪分支合并。
 **** TODO =--merged= 补充
 *** =checkout=
 [[https://git-scm.com/docs/git-checkout][git-checkout]] / =git help checkout=
