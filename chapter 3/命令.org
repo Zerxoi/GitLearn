@@ -286,13 +286,217 @@ git branch --edit-description [<branchname>]
 
 第二种形式如果给定 =<start-point>= 参数会在 =<start-point>= 出创建一个名为 =<branchname>= 的分支； 如果为给定 =<start-point>= 则会在当前 HEAD 所指处创建 =<branchname>= 分支。 *Note：该命令并不会将 HEAD 指向创建分支， 使用 =git checkout <branchname>= 来检出至新分支。*
 
-本地分支从远程跟踪分支启动时， Git 会建立分支（Git 配置 =<branch>.bane.remote= 和 =<branch>.name.merge= 两个配置项）， 以便 =git pull= 从能与远程跟踪分支合并。
+本地分支从远程跟踪分支启动时， Git 会建立分支（Git 配置 =<branch>.bane.remote= 和 =<branch>.name.merge= 两个配置项）， 以便 =git pull= 从能与远程跟踪分支合并， 并用 =-u= 或者 =--set-upstream-to= 选项来进行修改。
 **** TODO =--merged= 补充
 *** =checkout=
 [[https://git-scm.com/docs/git-checkout][git-checkout]] / =git help checkout=
 
 *git-checkout - 切换分支或者恢复工作目录（working tree）文件。*
 **** 描述
+如果给定 =<path>= 路径， =git checkout= 命令会用缓存区或者指定 =<tree-ish>= 更新工作目录（working tree）中的文件; 如果不指定 =path= 路径， =git checkout= 会将 HEAD 指向对应分支或者将变成变成 detached HEAD 直接指向指定提交。
 
-** 分支篇
+#+BEGIN_EXAMPLE
+git checkout <branch>
+#+END_EXAMPLE
+为了准备在指定分支上工作， 将 HEAD 指向指定分支， 并用指定分支所指提交内容更新缓存区（index）和工作目录（working tree）内容。 *Note：本地对工作目录（working tree）的文件的修改会被保存， 以便被用于下次提交*
+
+如果 =<branch>= 没有被找到， 但是存在一个远程仓库 =<remote>= 的有相匹配名字的远程跟踪分支 ， 可以用下列命令创建分支并跟踪远程分支。
+#+BEGIN_EXAMPLE
+$ git checkout -b <branch> --track <remote>/<branch>
+#+END_EXAMPLE
+
+如果 =<branch>= 在多个远程仓库中存在， 我们可以用其中一个来配置 =checkout.defaultRemote= 变量来消除歧义， 即便 =<branch>= 在远程仓库上不是唯一的。
+
+*Note: =<branch>= 可以省略， 但是不推荐省略。 因为在这种情况下， 命令退化为“检查当前分支”， 这是一个带有相当昂贵的副作用的美化无操作， 只显示当前分支的跟踪信息。*
+
+#+BEGIN_EXAMPLE
+git checkout -b|-B <new_branch> [<start point>]
+#+END_EXAMPLE
+指定 =-b= 选项会使用 =git branch= 创建一个分支， 之后会调用 =git checkout= 检出至新分支。 这种情况可是使用 =--track= 或 =--no-track= 选项， 将该选项传递给 =git branch= 命令。
+
+As a convenience, --track without -b implies branch creation; see the description of --track below.
+
+如果给出 =-B= ， 则创建 =<new_branch>=（如果它不存在）; 否则， 它被重置。
+#+BEGIN_EXAMPLE
+git checkout --detach [<branch>]
+git checkout [--detach] <commit>
+#END_EXAMPLE
+通过将 detached HEAD 指向指定 =<commit>= , 为在指定 =<commit>= 上工作做准备， 并且更新缓存区（index）和工作目录（working tree）中的文件。 本地对工作目录（working tree）文件的修改会被保存， 这样生成的工作目录（working tree）将会是提交中记录的状态加上本地修改。
+
+当 =<commit>= 参数是分支名时， =--detached= 选项可用于在分支尖端分离 HEAD。
+
+#+BEGIN_EXAMPLE
+git checkout [<tree-ish>] [--] <pathspec>…​
+#+END_EXAMPLE
+如果没有给定 =<tree-ish>= 参数， 用缓存区（index）中的内容重写工作目录（working tree）中的路径； 如果给定了 =<tree-ish>= 参数， 与 =<pathspec>= 在工作目录（working tree）和缓存区（index）相匹配的路径都会被更新。
+
+由于前一个失败的合并， 缓存区可能会包含未合并项。 默认情况下， 如果想要从缓存区（index）检出这样的文件到工作目录（working tree）， 检出操作会失败并且什么都不会检出。
+
+如果要检出多个文件， 这些文件中有未合并的文件项还有文件， 这样的话默认情况下会因为其中含有未合并文件项无法检出， 如果加上 =-f= 选项则会忽略未合并的文件项， 将其他的文件检出。
+
+可以通过 =--ours= 或者 =--theirs= 选项来指定检出合并中特定一侧的内容。
+
+使用 =-m= 选项时， 可以放弃对工作目录（working tree）文件所做的更改， 以重新创建原始冲突的合并结果。
+
+*** =merge=
+[[https://git-scm.com/docs/git-merge][git-merge]] / =git help merg=
+
+*git-merge - 将两个或多个开发历史联合到一起*
+**** 描述
+#+BEGIN_EXAMPLE
+git merge [-n] [--stat] [--no-commit] [--squash] [--[no-]edit]
+	[-s <strategy>] [-X <strategy-option>] [-S[<keyid>]]
+	[--[no-]allow-unrelated-histories]
+	[--[no-]rerere-autoupdate] [-m <msg>] [-F <file>] [<commit>…​]
+#+END_EXAMPLE
+从他们的历史与当前分支发生分歧的提交开始， 将之后的变更合并到当前分支。如果时快进则不会产生新的提交， 只需改变当前分支的指针即可； 如果不是快进合并（真合并）， 这是会产生一个新的提交， 该提交会有多个父提交。
+#+BEGIN_EXAMPLE
+git merge --abort
+#+END_EXAMPLE
+=git merge --abort= 只能在合并引起冲突后才能运行。 =git merge --abort= 将会终止合并过程并尝试重建合并前的状态。 但是， 如果在合并开始时有未提交的更改（特别是如果在合并开始后进一步修改了这些更改）， =git merge --abort= 在某种情况下将无法重建原始（合并前）的更改。 
+*Note：当有未提交的变更时不建议使用 =git merge= 命令， 因为有可能会在发生冲突时使我们处于难以退出的状态。*
+
+=git merge --continue= 也只能在发生合并冲突后才能运行。
+
+**** 合并前检查
+在应用外部变更之前， 应该使自己的工作处于一个良好的状态并且在本地已提交， 以至于在发生冲突时不会遭到重挫。
+
+如果未提交的修改索要更新的文件与 =git pull/git merge= 所要更新的文件相同， =git merge= 不会做任何事情。
+如果缓存区（index）内容相对与 HEAD 提交有任何变化， =git pull/git merge= 都会终止。
+
+**** 如何解决冲突
++ 不打算合并
+=git merge --abort=
++ 解决冲突
+修改冲突文件并将其加入到缓存区， 再用 =git commit= 或者 =git merge --continue= 来达成协议。后一个命令在调用 =git commit= 之前会检查是否存在正在进行的合并。
+
 ** 远程篇
+*** =remote=
+[[https://git-scm.com/docs/git-remote][git-remote]] / =git help remote=
+
+*git-remote - 管理跟踪存储库的集合*
+**** 命令
+如果没有参数， 命令展示现有远程存储库的列表。
+
+***** =add=
+#+BEGIN_EXAMPLE
+git remote add [-t <branch>] [-m <master>] [-f] [--[no-]tags] [--mirror=<fetch|push>] <name> <url>
+#+END_EXAMPLE
+为在 =URL= 的远程仓库添加一个名称 =<name> = 。 将配置信息写入 =config= 文件 ，之后可以使用 =git fetch= 来创建远程和更新跟踪分支。
+
+使用 =-f= 选项， =git fetch= 会在远程存储库信息建立之后立即运行 =git fetch <name>=。
+
+使用 =--tags= 选项， =git fetch <name>= 会导入远程存储库中的所有标签； 使用 =--no-tags= 选项， =git fetch <name>= 不会从远程存储库中导入标签。 *默认情况下， 只有被导入的分支上的标签会被导入。*、
+
+使用 =-t= 选项， 不会使用默认的全局引用规格（refspec）来跟踪远程存储库的所有分支， 而是只有指定分支 =<branch>= 的引用规格（refspec）会被创建。 可以给定多个 =-t <branch>= 来跟踪多个分支， 而不是跟踪全部分支。
+
+使用 =-m= 选项， 会创建一个符号化的引用 =refs/remotes/<name>/HEAD= 来指向远程存储库的 =master= 分支。
+***** =rename=
+#+BEGIN_EXAMPLE
+git remote rename <old> <new>
+#+END_EXAMPLE
+将远程存储库 =<old>= 重命名为 =<new>= , 所有这个远程存储库的远程跟踪分支和配置设置都会被更新。
+***** =remove= / =rm=
+#+BEGIN_EXAMPLE
+git remote remove <name>
+#+END_EXAMPLE
+删除名为 =<name>= 的远程存储库， 所有该远程存储库的远程跟踪分支和配置设置都会被删除。
+***** =set-head=
+#+BEGIN_EXAMPLE
+git remote set-head <name> (-a | --auto | -d | --delete | <branch>)
+#+END_EXAMPLE
+为远程存储库 =<name>= 创建默认分支（ =refs/remotes/<name>/HEAD= 符号引用所指的目标）。 默认分支不是必须的， 但是允许指定用远程存储库名来代替远程存储库的默认分支。
+
+使用 =-d= 或者 =--delete= 选项， 符号引用 =refs/remotes/<name>/HEAD= 会被删除。
+
+使用 =-a= 或者 =--auto= 选项， 用以查询远程存储库以确定其 =HEAD= 所指分支， 然后将符号引用 =refs/remotes/<name>/HEAD= 指向同一分支。
+
+可以使用 =<branch>= 参数显示设置符号引用 =refs/remotes/<name>/HEAD= 。
+***** =set-branch=
+#+BEGIN_EXAMPLE
+git remote set-branches [--add] <name> <branch>…​
+#+END_EXAMPLE
+修改命名远程仓库的跟踪分支列表。 在初始设置远程存储库后， 此命令可以用于跟踪可用远程分支的子集。 命令被解释为 =git remote add= 使用 =-t= 选项指定命名分支。
+
+使用 =--add= 选项， 不会覆盖当前的跟踪分支列表， 而是会把其加入表中。
+***** =get-url=
+#+BEGIN_EXAMPLE
+git remote get-url [--push] [--all] <name>
+#+END_EXAMPLE
+检索远程存储库的 URLs， 无参数时展示fetch URLs。
+
+使用 =--push= 参数， push URLs被查询。
+
+使用 =--all= 参数， 远程存储库的所有 URLs 都会被列出。
+
+***** =set-url=
+#+BEGIN_EXAMPLE
+git remote set-url [--push] <name> <newurl> [<oldurl>]
+git remote set-url --add [--push] <name> <newurl>
+git remote set-url --delete [--push] <name> <url>
+#+END_EXAMPLE
+更改远程存储库的 URL。
+***** =show=
+#+BEGIN_EXAMPLE
+git remote [-v | --verbose] show [-n] <name>…​
+#+END_EXAMPLE
+显示远程存储库的信息。
+
+使用 =-n= 选项， 远程存储库的 HEAD 不会用 =git ls-remote <name>= 来查询， 而是用缓存信息。
+***** =prune=
+#+BEGIN_EXAMPLE
+git remote prune [-n | --dry-run] <name>…​
+#+END_EXAMPLE
+删除指定 =<name>= 远程存储库中旧的引用。
+
+***** =update=
+#+BEGIN_EXAMPLE
+git remote [-v | --verbose] update [-p | --prune] [(<group> | <remote>)…​]
+#+END_EXAMPLE
+获取远程存储库或者由 =remote.<group>.group= 定义的远程存储库组的更新。如果既没有指定远程存储库也没有指定远程存储库组， 则将更新所有没有配置参数 =remote.<name>.skipDefaultUpdate= 设置为 =true= 的远程存储库。
+
+使用 =--prune= 选项， 会对所有更新的远程存储库进行修剪（prune）。
+
+*** =fecth=
+[[https://git-scm.com/docs/git-fetch][git-fetch]] / =git help fetch=
+
+*git-fetch - 从另一个存储库中下载引用和对象。*
+**** 描述
+#+BEGIN_EXAMPLE
+git fetch [<options>] [<repository> [<refspec>…​]]
+#+END_EXAMPLE
+从一个或多个其他存储库中获取分支和/或标签（统称为 refs）， 以及完成提交历史纪录所需的对象， 同时远程记录分支也会被更新。
+
+默认情况下， 任何指向被抓取的提交历史的标签都会被抓取下来， 效果等于抓去指向所感兴趣分支的标签。 这个默认行为可用 =--tag= 、 =--no-tag= 选项或配置 =remote.<name>.tagOpt= ， 通过使用明确获取标签的 =refspec= ， 可以获取不知想所感兴趣的分支的标记。
+
+=git fetch= 可以从已命名的存储库或给定 URL 中抓取； 如果再配置文件中配置了 =<group>= 选项， 则可以用给定的 =<group>= 参数一次从多个存储库抓取。
+
+如果没有给定指定的远程仓库， 默认使用 =origin= 远程存储库， 除非给该分支设置了上游分支。  
+
+*Note： =git fetch= 即使不为当前分支设置上游分支也可使用。*
+
+抓取的引用的名称及其指向的对象名称都会被写入 =.git/FETCH_HEAD= 。 这些信息会被脚本或者其他 =git= 命令所使用， 比如 =git pull= 。
+*** =pull=
+[[https://git-scm.com/docs/git-pull][git-pull]] / =git help pull=
+
+*git-pull - 从另一个存储库或者本地分支获取并与其合并*
+**** 描述
+将来自远程存储库的更改合并到当前分支中。 在默认模式下， =git pull= 是 =git fetch= 之后再运行 =git merge FETCH_HEAD= （获取的引用会被写入 FETCH_HEAD)的简写。 如果使用 =--rebase= 选项， 则不是使用 =git merge= 命令而是使用 =git rebase= 命令。
+
+=<repository>= 和 =<refspec>= 都是要传递给 =git fetch= 的参数。 =<refspec>= 用来指定所要获取存储库的引用及引用再本地的存放位置。
+
+默认的远程存储库 =<repository>= 和合并分支 =<branch>= 从分支的 =branch.<name>.remote= 和 =branch.<name>.merge= 选项中获取， 该选项可以使用 =git branch= 的 =-u= 或者 =--track= 来配置。
+*Note： 因此必须要为分支设定本地分支后， 才能直接调用 =git pull=命令。*
+*** =push=
+[[https://git-scm.com/docs/git-push][git-push]] / =git-push=
+
+*git-push - 更新远程引用以及关联的对象*
+**** 描述
+使用本地引用更新远程引用， 同时发送使给定引用完整所必需的对象。
+
+如果命令行没有指定 =<repository>= 参数来确定推送位置， 将查询当前分支的 =branch.*.remote= 配置以确定推送位置， 如果缺少配置则默认为 =origin= 。 
+*Note： 因此必须要为分支设定本地分支后， 才能直接调用 =git push=命令。*
+
+当命令行没有指定使用 =<refspec>...= 参数或者 =--all= ， =--mirror= ， =--tags= 选项， 命令通过查询 =remote.*.push= 配置找到默认的 =<refspec>= ， 如果找不到， 则使用 =push.default= 配置来决定推送什么。
+
+当命令行和配置都没有指定要推送的内容时， 使用默认行为， 这对应于 =push.default= 的简单值： 当前分支被推送到其上游分支， 但是作为安全措施， 如果上有分支名与本地分支名不同， 则命令中止。

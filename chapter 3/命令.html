@@ -3,12 +3,11 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-04-29 Mon 12:40 -->
+<!-- 2019-05-02 Thu 21:49 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>命令</title>
 <meta name="generator" content="Org mode" />
-<meta name="author" content="Zerxoi" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center;
@@ -185,7 +184,7 @@
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012-2019 Free Software Foundation, Inc.
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -234,42 +233,49 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org9a36795">1. 命令</a>
+<li><a href="#org993ab09">1. 命令</a>
 <ul>
-<li><a href="#org920eeb1">1.1. 基本篇</a>
+<li><a href="#orgbabfefe">1.1. 基本篇</a>
 <ul>
-<li><a href="#orga2601e8">1.1.1. <code>init</code></a></li>
-<li><a href="#orga4a1abf">1.1.2. <code>status</code></a></li>
-<li><a href="#orgdfe3ded">1.1.3. <code>add</code></a></li>
-<li><a href="#org3828a06">1.1.4. <code>commit</code></a></li>
-<li><a href="#orgc5ae59a">1.1.5. <code>diff</code></a></li>
-<li><a href="#org0d41ff7">1.1.6. <code>show</code></a></li>
-<li><a href="#orgdc8a273">1.1.7. <code>log</code></a></li>
-<li><a href="#orgdcd05cb">1.1.8. <code>rm</code></a></li>
-<li><a href="#org52cf380">1.1.9. <code>mv</code></a></li>
-<li><a href="#org7408345">1.1.10. 标识符术语</a></li>
-<li><a href="#org8f58e1c">1.1.11. <code>reset</code></a></li>
-<li><a href="#orgb19846d">1.1.12. <code>branch</code></a></li>
-<li><a href="#org627e7c9">1.1.13. <code>checkout</code></a></li>
+<li><a href="#org3fec89d">1.1.1. <code>init</code></a></li>
+<li><a href="#org3d6a291">1.1.2. <code>status</code></a></li>
+<li><a href="#org40266c0">1.1.3. <code>add</code></a></li>
+<li><a href="#org6926245">1.1.4. <code>commit</code></a></li>
+<li><a href="#org89f93a2">1.1.5. <code>diff</code></a></li>
+<li><a href="#org66b1e83">1.1.6. <code>show</code></a></li>
+<li><a href="#orgb46a36b">1.1.7. <code>log</code></a></li>
+<li><a href="#org2ce34a6">1.1.8. <code>rm</code></a></li>
+<li><a href="#org520ffe0">1.1.9. <code>mv</code></a></li>
+<li><a href="#org32f6a2b">1.1.10. 标识符术语</a></li>
+<li><a href="#org6bc5f31">1.1.11. <code>reset</code></a></li>
+<li><a href="#orgefc62ca">1.1.12. <code>branch</code></a></li>
+<li><a href="#org5cdbb20">1.1.13. <code>checkout</code></a></li>
+<li><a href="#org6b1927b">1.1.14. <code>merge</code></a></li>
 </ul>
 </li>
-<li><a href="#orga3d4150">1.2. 分支篇</a></li>
-<li><a href="#org9f2f65c">1.3. 远程篇</a></li>
+<li><a href="#org1b751cb">1.2. 远程篇</a>
+<ul>
+<li><a href="#orga61fc5b">1.2.1. <code>remote</code></a></li>
+<li><a href="#orgef1f4e0">1.2.2. <code>fecth</code></a></li>
+<li><a href="#org32c53a8">1.2.3. <code>pull</code></a></li>
+<li><a href="#org9b5fb5a">1.2.4. <code>push</code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org9a36795" class="outline-2">
-<h2 id="org9a36795"><span class="section-number-2">1</span> 命令</h2>
+<div id="outline-container-org993ab09" class="outline-2">
+<h2 id="org993ab09"><span class="section-number-2">1</span> 命令</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org920eeb1" class="outline-3">
-<h3 id="org920eeb1"><span class="section-number-3">1.1</span> 基本篇</h3>
+<div id="outline-container-orgbabfefe" class="outline-3">
+<h3 id="orgbabfefe"><span class="section-number-3">1.1</span> 基本篇</h3>
 <div class="outline-text-3" id="text-1-1">
 </div>
-<div id="outline-container-orga2601e8" class="outline-4">
-<h4 id="orga2601e8"><span class="section-number-4">1.1.1</span> <code>init</code></h4>
+<div id="outline-container-org3fec89d" class="outline-4">
+<h4 id="org3fec89d"><span class="section-number-4">1.1.1</span> <code>init</code></h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 <a href="https://git-scm.com/docs/git-init">git-init</a> / <code>git help init</code>
@@ -280,7 +286,7 @@ for the JavaScript code in this tag.
 </p>
 </div>
 <ol class="org-ol">
-<li><a id="org4f67343"></a>描述<br />
+<li><a id="orga067645"></a>描述<br />
 <div class="outline-text-5" id="text-1-1-1-1">
 <p>
 该命令创建一个空的 Git 存储库 —— 基本地包含 <code>objects</code> ， <code>refs/heads</code> , <code>refs/tags</code> 子目录和一些模板文件（详见模板目录）的 <code>.git</code> 目录。 初始化后的 <code>HEAD</code> 文件默认是指向 <code>master</code> 分支。
@@ -292,7 +298,7 @@ for the JavaScript code in this tag.
 </div>
 </li>
 
-<li><a id="org896186e"></a>模板目录<br />
+<li><a id="orgc0d626f"></a>模板目录<br />
 <div class="outline-text-5" id="text-1-1-1-2">
 <p>
 模板目录中的文件名或目录名只有不以 <code>.</code> 开头， 在 <code>.git</code> 目录建立之后就会被复制到其中。 模板目录默认为 <code>/usr/share/git-core/templates</code> 。
@@ -321,8 +327,8 @@ $ tree /usr/share/git-core/templates/
 </li>
 </ol>
 </div>
-<div id="outline-container-orga4a1abf" class="outline-4">
-<h4 id="orga4a1abf"><span class="section-number-4">1.1.2</span> <code>status</code></h4>
+<div id="outline-container-org3d6a291" class="outline-4">
+<h4 id="org3d6a291"><span class="section-number-4">1.1.2</span> <code>status</code></h4>
 <div class="outline-text-4" id="text-1-1-2">
 <p>
 <a href="https://git-scm.com/docs/git-status">git-status</a> / <code>git help status</code>
@@ -333,16 +339,16 @@ $ tree /usr/share/git-core/templates/
 </p>
 </div>
 <ol class="org-ol">
-<li><a id="org690d4d8"></a>描述<br />
+<li><a id="orgb3473c4"></a>描述<br />
 <div class="outline-text-5" id="text-1-1-2-1">
 <p>
 显示 <code>index</code> 文件与当前 HEAD 提交之间存在差异的路径， <code>working tree</code> 与 <code>index</code> 文件之间存在差异的路径，以及工作树中未由 Git 跟踪的路径。
 </p>
 </div>
 </li>
-<li><a id="org0aaf245"></a>文件状态<br />
+<li><a id="orgcf3cdd3"></a>文件状态<br />
 <ol class="org-ol">
-<li><a id="org9b5d01b"></a>Untracked files<br />
+<li><a id="org5358b3f"></a>Untracked files<br />
 <div class="outline-text-6" id="text-1-1-2-2-1">
 <p>
 未被 Git 追踪的文件， 
@@ -360,7 +366,7 @@ $ tree /usr/share/git-core/templates/
 </ul>
 </div>
 </li>
-<li><a id="org04a6a79"></a>Changes not staged for commit<br />
+<li><a id="org66c9162"></a>Changes not staged for commit<br />
 <div class="outline-text-6" id="text-1-1-2-2-2">
 <p>
 文件已被缓存过（Note：没有被缓存的话应该是 Untracked files状态了），但是在工作目录（working tree）中有被修改， 修改还未被缓存。
@@ -380,7 +386,7 @@ $ tree /usr/share/git-core/templates/
 </div>
 </li>
 
-<li><a id="org811c862"></a>Changes to be committed<br />
+<li><a id="org26225aa"></a>Changes to be committed<br />
 <div class="outline-text-6" id="text-1-1-2-2-3">
 <p>
 缓存区（index）中的文件与 HEAD 所指中对应的文件有差异， 即 <code>git diff --chached</code> 存在不同。 
@@ -398,8 +404,8 @@ $ tree /usr/share/git-core/templates/
 </li>
 </ol>
 </div>
-<div id="outline-container-orgdfe3ded" class="outline-4">
-<h4 id="orgdfe3ded"><span class="section-number-4">1.1.3</span> <code>add</code></h4>
+<div id="outline-container-org40266c0" class="outline-4">
+<h4 id="org40266c0"><span class="section-number-4">1.1.3</span> <code>add</code></h4>
 <div class="outline-text-4" id="text-1-1-3">
 <p>
 <a href="https://git-scm.com/docs/git-add">git-add</a> / <code>git help add</code>
@@ -410,7 +416,7 @@ $ tree /usr/share/git-core/templates/
 </p>
 </div>
 <ol class="org-ol">
-<li><a id="org26fb6b3"></a>描述<br />
+<li><a id="orgd536bc1"></a>描述<br />
 <div class="outline-text-5" id="text-1-1-3-1">
 <p>
 该命令用当前工作目录（working tree）中的内容来更新缓存区（index），用来缓存下次提交的内容。它通常讲所指定现存路径中的内容全部添加至缓存区，但是通过某些选项它还可以用于添加在 <code>work tree</code> 中内容相对 <code>inde</code> 中有所更改的文件或者删除 <code>index</code> 中存在而在 <code>working tree</code> 不存在的文件。
@@ -428,8 +434,8 @@ $ tree /usr/share/git-core/templates/
 </ol>
 </div>
 
-<div id="outline-container-org3828a06" class="outline-4">
-<h4 id="org3828a06"><span class="section-number-4">1.1.4</span> <code>commit</code></h4>
+<div id="outline-container-org6926245" class="outline-4">
+<h4 id="org6926245"><span class="section-number-4">1.1.4</span> <code>commit</code></h4>
 <div class="outline-text-4" id="text-1-1-4">
 <p>
 <a href="https://git-scm.com/docs/git-commit">git-commit</a> / <code>git help commit</code>
@@ -440,7 +446,7 @@ $ tree /usr/share/git-core/templates/
 </p>
 </div>
 <ol class="org-ol">
-<li><a id="org10e2938"></a>描述<br />
+<li><a id="org9a9b35a"></a>描述<br />
 <div class="outline-text-5" id="text-1-1-4-1">
 <p>
 创建一个新的提交，包含 <code>index</code> 中的当前内容和给定的日志消息用于描述改变。新提交是当前 HEAD 所指提交的直接子提交。通常 HEAD 是指向某一分支的， 若有新提交出现，分支会指向该新提交；若 HEAD 是 detached HEAD 的话， HEAD 会直接指向新提交。
@@ -453,8 +459,8 @@ $ tree /usr/share/git-core/templates/
 </li>
 </ol>
 </div>
-<div id="outline-container-orgc5ae59a" class="outline-4">
-<h4 id="orgc5ae59a"><span class="section-number-4">1.1.5</span> <code>diff</code></h4>
+<div id="outline-container-org89f93a2" class="outline-4">
+<h4 id="org89f93a2"><span class="section-number-4">1.1.5</span> <code>diff</code></h4>
 <div class="outline-text-4" id="text-1-1-5">
 <p>
 <a href="https://git-scm.com/docs/git-diff">git-diff</a> / <code>git help diff</code>
@@ -465,7 +471,7 @@ $ tree /usr/share/git-core/templates/
 </p>
 </div>
 <ol class="org-ol">
-<li><a id="org77e27d0"></a>描述<br />
+<li><a id="org455b600"></a>描述<br />
 <div class="outline-text-5" id="text-1-1-5-1">
 <p>
 展示工作目录（working tree）和缓存区（index）或某一树对象的区别，缓存区（index）和某一树对象（tree object）的区别，两个树对象（tree object）之间的区别，两个数据对象（blob object）之间的区别，甚至磁盘上两个文件之间的区别。
@@ -524,7 +530,7 @@ git diff [&lt;options&gt;] &lt;blob&gt; &lt;blob&gt;
 </p>
 </div>
 </li>
-<li><a id="orgb8cb1cc"></a>输出内容解释<br />
+<li><a id="orgba68ecf"></a>输出内容解释<br />
 <div class="outline-text-5" id="text-1-1-5-2">
 <pre class="example">
 $ git diff
@@ -541,8 +547,8 @@ index 29d14e6..1f8c977 100644 # index 后面为两个文件的 SHA-1 值， 最�
 </li>
 </ol>
 </div>
-<div id="outline-container-org0d41ff7" class="outline-4">
-<h4 id="org0d41ff7"><span class="section-number-4">1.1.6</span> <code>show</code></h4>
+<div id="outline-container-org66b1e83" class="outline-4">
+<h4 id="org66b1e83"><span class="section-number-4">1.1.6</span> <code>show</code></h4>
 <div class="outline-text-4" id="text-1-1-6">
 <p>
 <a href="https://git-scm.com/docs/git-show">git-show</a> / <code>git help show</code>
@@ -553,7 +559,7 @@ index 29d14e6..1f8c977 100644 # index 后面为两个文件的 SHA-1 值， 最�
 </p>
 </div>
 <ol class="org-ol">
-<li><a id="orgb8bc18c"></a>描述<br />
+<li><a id="orgf6af454"></a>描述<br />
 <div class="outline-text-5" id="text-1-1-6-1">
 <p>
 显示一个或多个对象（数据对象， 树对象， 标签对象和提交对象）。如果不指定任何对象， 默认是 HEAD。
@@ -579,8 +585,8 @@ index 29d14e6..1f8c977 100644 # index 后面为两个文件的 SHA-1 值， 最�
 </ol>
 </div>
 
-<div id="outline-container-orgdc8a273" class="outline-4">
-<h4 id="orgdc8a273"><span class="section-number-4">1.1.7</span> <code>log</code></h4>
+<div id="outline-container-orgb46a36b" class="outline-4">
+<h4 id="orgb46a36b"><span class="section-number-4">1.1.7</span> <code>log</code></h4>
 <div class="outline-text-4" id="text-1-1-7">
 <p>
 <a href="https://git-scm.com/docs/git-log">git-log</a> / <code>git help log</code>
@@ -592,7 +598,7 @@ index 29d14e6..1f8c977 100644 # index 后面为两个文件的 SHA-1 值， 最�
 </div>
 
 <ol class="org-ol">
-<li><a id="org5e8eb3f"></a>描述<br />
+<li><a id="org3b797e6"></a>描述<br />
 <div class="outline-text-5" id="text-1-1-7-1">
 <p>
 显示提交日志。
@@ -600,7 +606,7 @@ index 29d14e6..1f8c977 100644 # index 后面为两个文件的 SHA-1 值， 最�
 </div>
 </li>
 
-<li><a id="orgba89986"></a>常用<br />
+<li><a id="org9f758ca"></a>常用<br />
 <div class="outline-text-5" id="text-1-1-7-2">
 <p>
 <code>git log --all --oneline --graph</code>
@@ -615,8 +621,8 @@ index 29d14e6..1f8c977 100644 # index 后面为两个文件的 SHA-1 值， 最�
 </li>
 </ol>
 </div>
-<div id="outline-container-orgdcd05cb" class="outline-4">
-<h4 id="orgdcd05cb"><span class="section-number-4">1.1.8</span> <code>rm</code></h4>
+<div id="outline-container-org2ce34a6" class="outline-4">
+<h4 id="org2ce34a6"><span class="section-number-4">1.1.8</span> <code>rm</code></h4>
 <div class="outline-text-4" id="text-1-1-8">
 <p>
 <a href="https://git-scm.com/docs/git-rm">git-rm</a> / <code>git help rm</code>
@@ -627,7 +633,7 @@ index 29d14e6..1f8c977 100644 # index 后面为两个文件的 SHA-1 值， 最�
 </p>
 </div>
 <ol class="org-ol">
-<li><a id="orgbf0f8be"></a>描述<br />
+<li><a id="org6c184e3"></a>描述<br />
 <div class="outline-text-5" id="text-1-1-8-1">
 <p>
 从缓存区（index）或者从缓存区（index）和工作目录（working tree）中删除文件。 然而 <code>git rm</code> 并不能只删除工作目录（working tree）中的文件而不删除缓存区（index）中的文件，如果要删除可以用 <code>/bin/rm</code> 或者右键删除。
@@ -644,8 +650,8 @@ index 29d14e6..1f8c977 100644 # index 后面为两个文件的 SHA-1 值， 最�
 </li>
 </ol>
 </div>
-<div id="outline-container-org52cf380" class="outline-4">
-<h4 id="org52cf380"><span class="section-number-4">1.1.9</span> <code>mv</code></h4>
+<div id="outline-container-org520ffe0" class="outline-4">
+<h4 id="org520ffe0"><span class="section-number-4">1.1.9</span> <code>mv</code></h4>
 <div class="outline-text-4" id="text-1-1-9">
 <p>
 <a href="https://git-scm.com/docs/git-mv">git-mv</a> / <code>git help mv</code>
@@ -656,7 +662,7 @@ index 29d14e6..1f8c977 100644 # index 后面为两个文件的 SHA-1 值， 最�
 </p>
 </div>
 <ol class="org-ol">
-<li><a id="org5a28285"></a>描述<br />
+<li><a id="orgced984c"></a>描述<br />
 <div class="outline-text-5" id="text-1-1-9-1">
 <p>
 移动或重命名一个文件， 一个目录或一个符号链接（？）
@@ -676,8 +682,8 @@ git mv [-v] [-f] [-n] [-k] &lt;source&gt; ... &lt;destination directory&gt;
 </li>
 </ol>
 </div>
-<div id="outline-container-org7408345" class="outline-4">
-<h4 id="org7408345"><span class="section-number-4">1.1.10</span> 标识符术语</h4>
+<div id="outline-container-org32f6a2b" class="outline-4">
+<h4 id="org32f6a2b"><span class="section-number-4">1.1.10</span> 标识符术语</h4>
 <div class="outline-text-4" id="text-1-1-10">
 <p>
 <a href="https://mirrors.edge.kernel.org/pub/software/scm/git/docs/#_identifier_terminology">Identifier Terminology</a>
@@ -745,8 +751,8 @@ git mv [-v] [-f] [-n] [-k] &lt;source&gt; ... &lt;destination directory&gt;
 </p>
 </div>
 </div>
-<div id="outline-container-org8f58e1c" class="outline-4">
-<h4 id="org8f58e1c"><span class="section-number-4">1.1.11</span> <code>reset</code></h4>
+<div id="outline-container-org6bc5f31" class="outline-4">
+<h4 id="org6bc5f31"><span class="section-number-4">1.1.11</span> <code>reset</code></h4>
 <div class="outline-text-4" id="text-1-1-11">
 <p>
 <a href="https://git-scm.com/docs/git-reset">git-reset</a> / <code>git help reset</code>
@@ -757,7 +763,7 @@ git mv [-v] [-f] [-n] [-k] &lt;source&gt; ... &lt;destination directory&gt;
 </p>
 </div>
 <ol class="org-ol">
-<li><a id="org2021511"></a>描述<br />
+<li><a id="orga013daf"></a>描述<br />
 <div class="outline-text-5" id="text-1-1-11-1">
 <pre class="example">
 git reset [-q] [&lt;tree-ish&gt;] [--] &lt;paths&gt;…​
@@ -837,11 +843,11 @@ git reset [&lt;mode&gt;] [&lt;commit&gt;]
 </p>
 </div>
 </li>
-<li><a id="org216fa23"></a><code>&lt;mode&gt;</code> 模式补充<br /></li>
+<li><a id="org73e9efc"></a><span class="todo TODO">TODO</span> <code>&lt;mode&gt;</code> 模式补充<br /></li>
 </ol>
 </div>
-<div id="outline-container-orgb19846d" class="outline-4">
-<h4 id="orgb19846d"><span class="section-number-4">1.1.12</span> <code>branch</code></h4>
+<div id="outline-container-orgefc62ca" class="outline-4">
+<h4 id="orgefc62ca"><span class="section-number-4">1.1.12</span> <code>branch</code></h4>
 <div class="outline-text-4" id="text-1-1-12">
 <p>
 <a href="https://git-scm.com/docs/git-branch">git-branch</a> / <code>git help branch</code>
@@ -852,7 +858,7 @@ git reset [&lt;mode&gt;] [&lt;commit&gt;]
 </p>
 </div>
 <ol class="org-ol">
-<li><a id="org85d7efb"></a>描述<br />
+<li><a id="org47fcc46"></a>描述<br />
 <div class="outline-text-5" id="text-1-1-12-1">
 <pre class="example">
 git branch [--color[=&lt;when&gt;] | --no-color] [-r | -a]
@@ -880,14 +886,21 @@ git branch --edit-description [&lt;branchname&gt;]
 <p>
 给定 <code>--contains</code> 选项还显示包含给定提交的分支（ <b>换句话说就是哪个分支所指向的提交是指定提交的后代，就显示哪个分支</b> ）， <code>--no-contains</code> 则相反。
 </p>
+
+<p>
+第二种形式如果给定 <code>&lt;start-point&gt;</code> 参数会在 <code>&lt;start-point&gt;</code> 出创建一个名为 <code>&lt;branchname&gt;</code> 的分支； 如果为给定 <code>&lt;start-point&gt;</code> 则会在当前 HEAD 所指处创建 <code>&lt;branchname&gt;</code> 分支。 <b>Note：该命令并不会将 HEAD 指向创建分支， 使用 <code>git checkout &lt;branchname&gt;</code> 来检出至新分支。</b>
+</p>
+
+<p>
+本地分支从远程跟踪分支启动时， Git 会建立分支（Git 配置 <code>&lt;branch&gt;.bane.remote</code> 和 <code>&lt;branch&gt;.name.merge</code> 两个配置项）， 以便 <code>git pull</code> 从能与远程跟踪分支合并， 并用 <code>-u</code> 或者 <code>--set-upstream-to</code> 选项来进行修改。
+</p>
 </div>
 </li>
-
-<li><a id="org776ec7a"></a><span class="todo TODO">TODO</span> <code>--merged</code> 补充<br /></li>
+<li><a id="org1614d72"></a><span class="todo TODO">TODO</span> <code>--merged</code> 补充<br /></li>
 </ol>
 </div>
-<div id="outline-container-org627e7c9" class="outline-4">
-<h4 id="org627e7c9"><span class="section-number-4">1.1.13</span> <code>checkout</code></h4>
+<div id="outline-container-org5cdbb20" class="outline-4">
+<h4 id="org5cdbb20"><span class="section-number-4">1.1.13</span> <code>checkout</code></h4>
 <div class="outline-text-4" id="text-1-1-13">
 <p>
 <a href="https://git-scm.com/docs/git-checkout">git-checkout</a> / <code>git help checkout</code>
@@ -898,22 +911,446 @@ git branch --edit-description [&lt;branchname&gt;]
 </p>
 </div>
 <ol class="org-ol">
-<li><a id="org82245a7"></a>描述<br /></li>
+<li><a id="org34c2e51"></a>描述<br />
+<div class="outline-text-5" id="text-1-1-13-1">
+<p>
+如果给定 <code>&lt;path&gt;</code> 路径， <code>git checkout</code> 命令会用缓存区或者指定 <code>&lt;tree-ish&gt;</code> 更新工作目录（working tree）中的文件; 如果不指定 <code>path</code> 路径， <code>git checkout</code> 会将 HEAD 指向对应分支或者将变成变成 detached HEAD 直接指向指定提交。
+</p>
+
+<pre class="example">
+git checkout &lt;branch&gt;
+</pre>
+<p>
+为了准备在指定分支上工作， 将 HEAD 指向指定分支， 并用指定分支所指提交内容更新缓存区（index）和工作目录（working tree）内容。 <b>Note：本地对工作目录（working tree）的文件的修改会被保存， 以便被用于下次提交</b>
+</p>
+
+<p>
+如果 <code>&lt;branch&gt;</code> 没有被找到， 但是存在一个远程仓库 <code>&lt;remote&gt;</code> 的有相匹配名字的远程跟踪分支 ， 可以用下列命令创建分支并跟踪远程分支。
+</p>
+<pre class="example">
+$ git checkout -b &lt;branch&gt; --track &lt;remote&gt;/&lt;branch&gt;
+</pre>
+
+<p>
+如果 <code>&lt;branch&gt;</code> 在多个远程仓库中存在， 我们可以用其中一个来配置 <code>checkout.defaultRemote</code> 变量来消除歧义， 即便 <code>&lt;branch&gt;</code> 在远程仓库上不是唯一的。
+</p>
+
+<p>
+<b>Note: <code>&lt;branch&gt;</code> 可以省略， 但是不推荐省略。 因为在这种情况下， 命令退化为“检查当前分支”， 这是一个带有相当昂贵的副作用的美化无操作， 只显示当前分支的跟踪信息。</b>
+</p>
+
+<pre class="example">
+git checkout -b|-B &lt;new_branch&gt; [&lt;start point&gt;]
+</pre>
+<p>
+指定 <code>-b</code> 选项会使用 <code>git branch</code> 创建一个分支， 之后会调用 <code>git checkout</code> 检出至新分支。 这种情况可是使用 <code>--track</code> 或 <code>--no-track</code> 选项， 将该选项传递给 <code>git branch</code> 命令。
+</p>
+
+<p>
+As a convenience, &#x2013;track without -b implies branch creation; see the description of &#x2013;track below.
+</p>
+
+<p>
+如果给出 <code>-B</code> ， 则创建 =&lt;new<sub>branch</sub>&gt;=（如果它不存在）; 否则， 它被重置。
+</p>
+<pre class="example">
+git checkout --detach [&lt;branch&gt;]
+git checkout [--detach] &lt;commit&gt;
+#END_EXAMPLE
+通过将 detached HEAD 指向指定 =&lt;commit&gt;= , 为在指定 =&lt;commit&gt;= 上工作做准备， 并且更新缓存区（index）和工作目录（working tree）中的文件。 本地对工作目录（working tree）文件的修改会被保存， 这样生成的工作目录（working tree）将会是提交中记录的状态加上本地修改。
+
+当 =&lt;commit&gt;= 参数是分支名时， =--detached= 选项可用于在分支尖端分离 HEAD。
+
+#+BEGIN_EXAMPLE
+git checkout [&lt;tree-ish&gt;] [--] &lt;pathspec&gt;…​
+</pre>
+<p>
+如果没有给定 <code>&lt;tree-ish&gt;</code> 参数， 用缓存区（index）中的内容重写工作目录（working tree）中的路径； 如果给定了 <code>&lt;tree-ish&gt;</code> 参数， 与 <code>&lt;pathspec&gt;</code> 在工作目录（working tree）和缓存区（index）相匹配的路径都会被更新。
+</p>
+
+<p>
+由于前一个失败的合并， 缓存区可能会包含未合并项。 默认情况下， 如果想要从缓存区（index）检出这样的文件到工作目录（working tree）， 检出操作会失败并且什么都不会检出。
+</p>
+
+<p>
+如果要检出多个文件， 这些文件中有未合并的文件项还有文件， 这样的话默认情况下会因为其中含有未合并文件项无法检出， 如果加上 <code>-f</code> 选项则会忽略未合并的文件项， 将其他的文件检出。
+</p>
+
+<p>
+可以通过 <code>--ours</code> 或者 <code>--theirs</code> 选项来指定检出合并中特定一侧的内容。
+</p>
+
+<p>
+使用 <code>-m</code> 选项时， 可以放弃对工作目录（working tree）文件所做的更改， 以重新创建原始冲突的合并结果。
+</p>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-org6b1927b" class="outline-4">
+<h4 id="org6b1927b"><span class="section-number-4">1.1.14</span> <code>merge</code></h4>
+<div class="outline-text-4" id="text-1-1-14">
+<p>
+<a href="https://git-scm.com/docs/git-merge">git-merge</a> / <code>git help merg</code>
+</p>
+
+<p>
+<b>git-merge - 将两个或多个开发历史联合到一起</b>
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org67cc6f4"></a>描述<br />
+<div class="outline-text-5" id="text-1-1-14-1">
+<pre class="example">
+git merge [-n] [--stat] [--no-commit] [--squash] [--[no-]edit]
+	[-s &lt;strategy&gt;] [-X &lt;strategy-option&gt;] [-S[&lt;keyid&gt;]]
+	[--[no-]allow-unrelated-histories]
+	[--[no-]rerere-autoupdate] [-m &lt;msg&gt;] [-F &lt;file&gt;] [&lt;commit&gt;…​]
+</pre>
+<p>
+从他们的历史与当前分支发生分歧的提交开始， 将之后的变更合并到当前分支。如果时快进则不会产生新的提交， 只需改变当前分支的指针即可； 如果不是快进合并（真合并）， 这是会产生一个新的提交， 该提交会有多个父提交。
+</p>
+<pre class="example">
+git merge --abort
+</pre>
+<p>
+<code>git merge --abort</code> 只能在合并引起冲突后才能运行。 <code>git merge --abort</code> 将会终止合并过程并尝试重建合并前的状态。 但是， 如果在合并开始时有未提交的更改（特别是如果在合并开始后进一步修改了这些更改）， <code>git merge --abort</code> 在某种情况下将无法重建原始（合并前）的更改。 
+<b>Note：当有未提交的变更时不建议使用 <code>git merge</code> 命令， 因为有可能会在发生冲突时使我们处于难以退出的状态。</b>
+</p>
+
+<p>
+<code>git merge --continue</code> 也只能在发生合并冲突后才能运行。
+</p>
+</div>
+</li>
+
+<li><a id="org48831f5"></a>合并前检查<br />
+<div class="outline-text-5" id="text-1-1-14-2">
+<p>
+在应用外部变更之前， 应该使自己的工作处于一个良好的状态并且在本地已提交， 以至于在发生冲突时不会遭到重挫。
+</p>
+
+<p>
+如果未提交的修改索要更新的文件与 <code>git pull/git merge</code> 所要更新的文件相同， <code>git merge</code> 不会做任何事情。
+如果缓存区（index）内容相对与 HEAD 提交有任何变化， <code>git pull/git merge</code> 都会终止。
+</p>
+</div>
+</li>
+
+<li><a id="orge5434b7"></a>如何解决冲突<br />
+<div class="outline-text-5" id="text-1-1-14-3">
+<ul class="org-ul">
+<li>不打算合并</li>
+</ul>
+<p>
+<code>git merge --abort</code>
+</p>
+<ul class="org-ul">
+<li>解决冲突</li>
+</ul>
+<p>
+修改冲突文件并将其加入到缓存区， 再用 <code>git commit</code> 或者 <code>git merge --continue</code> 来达成协议。后一个命令在调用 <code>git commit</code> 之前会检查是否存在正在进行的合并。
+</p>
+</div>
+</li>
 </ol>
 </div>
 </div>
 
-<div id="outline-container-orga3d4150" class="outline-3">
-<h3 id="orga3d4150"><span class="section-number-3">1.2</span> 分支篇</h3>
+<div id="outline-container-org1b751cb" class="outline-3">
+<h3 id="org1b751cb"><span class="section-number-3">1.2</span> 远程篇</h3>
+<div class="outline-text-3" id="text-1-2">
 </div>
-<div id="outline-container-org9f2f65c" class="outline-3">
-<h3 id="org9f2f65c"><span class="section-number-3">1.3</span> 远程篇</h3>
+<div id="outline-container-orga61fc5b" class="outline-4">
+<h4 id="orga61fc5b"><span class="section-number-4">1.2.1</span> <code>remote</code></h4>
+<div class="outline-text-4" id="text-1-2-1">
+<p>
+<a href="https://git-scm.com/docs/git-remote">git-remote</a> / <code>git help remote</code>
+</p>
+
+<p>
+<b>git-remote - 管理跟踪存储库的集合</b>
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org7ce91c8"></a>命令<br />
+<div class="outline-text-5" id="text-1-2-1-1">
+<p>
+如果没有参数， 命令展示现有远程存储库的列表。
+</p>
+</div>
+
+<ol class="org-ol">
+<li><a id="org3bb8ab9"></a><code>add</code><br />
+<div class="outline-text-6" id="text-1-2-1-1-1">
+<pre class="example">
+git remote add [-t &lt;branch&gt;] [-m &lt;master&gt;] [-f] [--[no-]tags] [--mirror=&lt;fetch|push&gt;] &lt;name&gt; &lt;url&gt;
+</pre>
+<p>
+为在 <code>URL</code> 的远程仓库添加一个名称 <code>&lt;name&gt; = 。 将配置信息写入 =config</code> 文件 ，之后可以使用 <code>git fetch</code> 来创建远程和更新跟踪分支。
+</p>
+
+<p>
+使用 <code>-f</code> 选项， <code>git fetch</code> 会在远程存储库信息建立之后立即运行 =git fetch &lt;name&gt;=。
+</p>
+
+<p>
+使用 <code>--tags</code> 选项， <code>git fetch &lt;name&gt;</code> 会导入远程存储库中的所有标签； 使用 <code>--no-tags</code> 选项， <code>git fetch &lt;name&gt;</code> 不会从远程存储库中导入标签。 *默认情况下， 只有被导入的分支上的标签会被导入。*、
+</p>
+
+<p>
+使用 <code>-t</code> 选项， 不会使用默认的全局引用规格（refspec）来跟踪远程存储库的所有分支， 而是只有指定分支 <code>&lt;branch&gt;</code> 的引用规格（refspec）会被创建。 可以给定多个 <code>-t &lt;branch&gt;</code> 来跟踪多个分支， 而不是跟踪全部分支。
+</p>
+
+<p>
+使用 <code>-m</code> 选项， 会创建一个符号化的引用 <code>refs/remotes/&lt;name&gt;/HEAD</code> 来指向远程存储库的 <code>master</code> 分支。
+</p>
+</div>
+</li>
+<li><a id="orgfb315cb"></a><code>rename</code><br />
+<div class="outline-text-6" id="text-1-2-1-1-2">
+<pre class="example">
+git remote rename &lt;old&gt; &lt;new&gt;
+</pre>
+<p>
+将远程存储库 <code>&lt;old&gt;</code> 重命名为 <code>&lt;new&gt;</code> , 所有这个远程存储库的远程跟踪分支和配置设置都会被更新。
+</p>
+</div>
+</li>
+<li><a id="org2366af5"></a><code>remove</code> / <code>rm</code><br />
+<div class="outline-text-6" id="text-1-2-1-1-3">
+<pre class="example">
+git remote remove &lt;name&gt;
+</pre>
+<p>
+删除名为 <code>&lt;name&gt;</code> 的远程存储库， 所有该远程存储库的远程跟踪分支和配置设置都会被删除。
+</p>
+</div>
+</li>
+<li><a id="org4c1af79"></a><code>set-head</code><br />
+<div class="outline-text-6" id="text-1-2-1-1-4">
+<pre class="example">
+git remote set-head &lt;name&gt; (-a | --auto | -d | --delete | &lt;branch&gt;)
+</pre>
+<p>
+为远程存储库 <code>&lt;name&gt;</code> 创建默认分支（ <code>refs/remotes/&lt;name&gt;/HEAD</code> 符号引用所指的目标）。 默认分支不是必须的， 但是允许指定用远程存储库名来代替远程存储库的默认分支。
+</p>
+
+<p>
+使用 <code>-d</code> 或者 <code>--delete</code> 选项， 符号引用 <code>refs/remotes/&lt;name&gt;/HEAD</code> 会被删除。
+</p>
+
+<p>
+使用 <code>-a</code> 或者 <code>--auto</code> 选项， 用以查询远程存储库以确定其 <code>HEAD</code> 所指分支， 然后将符号引用 <code>refs/remotes/&lt;name&gt;/HEAD</code> 指向同一分支。
+</p>
+
+<p>
+可以使用 <code>&lt;branch&gt;</code> 参数显示设置符号引用 <code>refs/remotes/&lt;name&gt;/HEAD</code> 。
+</p>
+</div>
+</li>
+<li><a id="org9da40c1"></a><code>set-branch</code><br />
+<div class="outline-text-6" id="text-1-2-1-1-5">
+<pre class="example">
+git remote set-branches [--add] &lt;name&gt; &lt;branch&gt;…​
+</pre>
+<p>
+修改命名远程仓库的跟踪分支列表。 在初始设置远程存储库后， 此命令可以用于跟踪可用远程分支的子集。 命令被解释为 <code>git remote add</code> 使用 <code>-t</code> 选项指定命名分支。
+</p>
+
+<p>
+使用 <code>--add</code> 选项， 不会覆盖当前的跟踪分支列表， 而是会把其加入表中。
+</p>
+</div>
+</li>
+<li><a id="orgf8ae7f4"></a><code>get-url</code><br />
+<div class="outline-text-6" id="text-1-2-1-1-6">
+<pre class="example">
+git remote get-url [--push] [--all] &lt;name&gt;
+</pre>
+<p>
+检索远程存储库的 URLs， 无参数时展示fetch URLs。
+</p>
+
+<p>
+使用 <code>--push</code> 参数， push URLs被查询。
+</p>
+
+<p>
+使用 <code>--all</code> 参数， 远程存储库的所有 URLs 都会被列出。
+</p>
+</div>
+</li>
+
+<li><a id="org4220590"></a><code>set-url</code><br />
+<div class="outline-text-6" id="text-1-2-1-1-7">
+<pre class="example">
+git remote set-url [--push] &lt;name&gt; &lt;newurl&gt; [&lt;oldurl&gt;]
+git remote set-url --add [--push] &lt;name&gt; &lt;newurl&gt;
+git remote set-url --delete [--push] &lt;name&gt; &lt;url&gt;
+</pre>
+<p>
+更改远程存储库的 URL。
+</p>
+</div>
+</li>
+<li><a id="orga337057"></a><code>show</code><br />
+<div class="outline-text-6" id="text-1-2-1-1-8">
+<pre class="example">
+git remote [-v | --verbose] show [-n] &lt;name&gt;…​
+</pre>
+<p>
+显示远程存储库的信息。
+</p>
+
+<p>
+使用 <code>-n</code> 选项， 远程存储库的 HEAD 不会用 <code>git ls-remote &lt;name&gt;</code> 来查询， 而是用缓存信息。
+</p>
+</div>
+</li>
+<li><a id="org7f593fa"></a><code>prune</code><br />
+<div class="outline-text-6" id="text-1-2-1-1-9">
+<pre class="example">
+git remote prune [-n | --dry-run] &lt;name&gt;…​
+</pre>
+<p>
+删除指定 <code>&lt;name&gt;</code> 远程存储库中旧的引用。
+</p>
+</div>
+</li>
+
+<li><a id="orgf6e5741"></a><code>update</code><br />
+<div class="outline-text-6" id="text-1-2-1-1-10">
+<pre class="example">
+git remote [-v | --verbose] update [-p | --prune] [(&lt;group&gt; | &lt;remote&gt;)…​]
+</pre>
+<p>
+获取远程存储库或者由 <code>remote.&lt;group&gt;.group</code> 定义的远程存储库组的更新。如果既没有指定远程存储库也没有指定远程存储库组， 则将更新所有没有配置参数 <code>remote.&lt;name&gt;.skipDefaultUpdate</code> 设置为 <code>true</code> 的远程存储库。
+</p>
+
+<p>
+使用 <code>--prune</code> 选项， 会对所有更新的远程存储库进行修剪（prune）。
+</p>
+</div>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-orgef1f4e0" class="outline-4">
+<h4 id="orgef1f4e0"><span class="section-number-4">1.2.2</span> <code>fecth</code></h4>
+<div class="outline-text-4" id="text-1-2-2">
+<p>
+<a href="https://git-scm.com/docs/git-fetch">git-fetch</a> / <code>git help fetch</code>
+</p>
+
+<p>
+<b>git-fetch - 从另一个存储库中下载引用和对象。</b>
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org864face"></a>描述<br />
+<div class="outline-text-5" id="text-1-2-2-1">
+<pre class="example">
+git fetch [&lt;options&gt;] [&lt;repository&gt; [&lt;refspec&gt;…​]]
+</pre>
+<p>
+从一个或多个其他存储库中获取分支和/或标签（统称为 refs）， 以及完成提交历史纪录所需的对象， 同时远程记录分支也会被更新。
+</p>
+
+<p>
+默认情况下， 任何指向被抓取的提交历史的标签都会被抓取下来， 效果等于抓去指向所感兴趣分支的标签。 这个默认行为可用 <code>--tag</code> 、 <code>--no-tag</code> 选项或配置 <code>remote.&lt;name&gt;.tagOpt</code> ， 通过使用明确获取标签的 <code>refspec</code> ， 可以获取不知想所感兴趣的分支的标记。
+</p>
+
+<p>
+<code>git fetch</code> 可以从已命名的存储库或给定 URL 中抓取； 如果再配置文件中配置了 <code>&lt;group&gt;</code> 选项， 则可以用给定的 <code>&lt;group&gt;</code> 参数一次从多个存储库抓取。
+</p>
+
+<p>
+如果没有给定指定的远程仓库， 默认使用 <code>origin</code> 远程存储库， 除非给该分支设置了上游分支。  
+</p>
+
+<p>
+<b>Note： <code>git fetch</code> 即使不为当前分支设置上游分支也可使用。</b>
+</p>
+
+<p>
+抓取的引用的名称及其指向的对象名称都会被写入 <code>.git/FETCH_HEAD</code> 。 这些信息会被脚本或者其他 <code>git</code> 命令所使用， 比如 <code>git pull</code> 。
+</p>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org32c53a8" class="outline-4">
+<h4 id="org32c53a8"><span class="section-number-4">1.2.3</span> <code>pull</code></h4>
+<div class="outline-text-4" id="text-1-2-3">
+<p>
+<a href="https://git-scm.com/docs/git-pull">git-pull</a> / <code>git help pull</code>
+</p>
+
+<p>
+<b>git-pull - 从另一个存储库或者本地分支获取并与其合并</b>
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="orgdb9779e"></a>描述<br />
+<div class="outline-text-5" id="text-1-2-3-1">
+<p>
+将来自远程存储库的更改合并到当前分支中。 在默认模式下， <code>git pull</code> 是 <code>git fetch</code> 之后再运行 <code>git merge FETCH_HEAD</code> （获取的引用会被写入 FETCH<sub>HEAD</sub>)的简写。 如果使用 <code>--rebase</code> 选项， 则不是使用 <code>git merge</code> 命令而是使用 <code>git rebase</code> 命令。
+</p>
+
+<p>
+<code>&lt;repository&gt;</code> 和 <code>&lt;refspec&gt;</code> 都是要传递给 <code>git fetch</code> 的参数。 <code>&lt;refspec&gt;</code> 用来指定所要获取存储库的引用及引用再本地的存放位置。
+</p>
+
+<p>
+默认的远程存储库 <code>&lt;repository&gt;</code> 和合并分支 <code>&lt;branch&gt;</code> 从分支的 <code>branch.&lt;name&gt;.remote</code> 和 <code>branch.&lt;name&gt;.merge</code> 选项中获取， 该选项可以使用 <code>git branch</code> 的 <code>-u</code> 或者 <code>--track</code> 来配置。
+<b>Note： 因此必须要为分支设定本地分支后， 才能直接调用 =git pull=命令。</b>
+</p>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org9b5fb5a" class="outline-4">
+<h4 id="org9b5fb5a"><span class="section-number-4">1.2.4</span> <code>push</code></h4>
+<div class="outline-text-4" id="text-1-2-4">
+<p>
+<a href="https://git-scm.com/docs/git-push">git-push</a> / <code>git-push</code>
+</p>
+
+<p>
+<b>git-push - 更新远程引用以及关联的对象</b>
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org218e360"></a>描述<br />
+<div class="outline-text-5" id="text-1-2-4-1">
+<p>
+使用本地引用更新远程引用， 同时发送使给定引用完整所必需的对象。
+</p>
+
+<p>
+如果命令行没有指定 <code>&lt;repository&gt;</code> 参数来确定推送位置， 将查询当前分支的 <code>branch.*.remote</code> 配置以确定推送位置， 如果缺少配置则默认为 <code>origin</code> 。 
+<b>Note： 因此必须要为分支设定本地分支后， 才能直接调用 =git push=命令。</b>
+</p>
+
+<p>
+当命令行没有指定使用 <code>&lt;refspec&gt;...</code> 参数或者 <code>--all</code> ， <code>--mirror</code> ， <code>--tags</code> 选项， 命令通过查询 <code>remote.*.push</code> 配置找到默认的 <code>&lt;refspec&gt;</code> ， 如果找不到， 则使用 <code>push.default</code> 配置来决定推送什么。
+</p>
+
+<p>
+当命令行和配置都没有指定要推送的内容时， 使用默认行为， 这对应于 <code>push.default</code> 的简单值： 当前分支被推送到其上游分支， 但是作为安全措施， 如果上有分支名与本地分支名不同， 则命令中止。</p>
+</div>
+</li>
+</ol>
+</div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="author">Author: Zerxoi</p>
-<p class="date">Created: 2019-04-29 Mon 12:40</p>
+<p class="date">Created: 2019-05-02 Thu 21:49</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
